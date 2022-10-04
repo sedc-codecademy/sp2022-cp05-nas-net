@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NewsAggregator.Configurations\NewsAggregator.Configurations.csproj" />
     <ProjectReference Include="..\NewsAggregator.DataAccess\NewsAggregator.DataAccess.csproj" />
     <ProjectReference Include="..\NewsAggregator.Domain\NewsAggregator.Domain.csproj" />
+    <ProjectReference Include="..\NewsAggregator.Exceptions\NewsAggregator.Exceptions.csproj" />
     <ProjectReference Include="..\NewsAggregator.InterfaceModels\NewsAggregator.InterfaceModels.csproj" />
     <ProjectReference Include="..\NewsAggregator.Mappers\NewsAggregator.Mappers.csproj" />
   </ItemGroup>

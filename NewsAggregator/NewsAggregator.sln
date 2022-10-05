@@ -3,19 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.Api", "NewsAggregator.Api\NewsAggregator.Api.csproj", "{6402D562-BA0D-43FC-8716-243A2DD5148C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.Api", "NewsAggregator.Api\NewsAggregator.Api.csproj", "{6402D562-BA0D-43FC-8716-243A2DD5148C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.DataAccess", "NewsAggregator.DataAccess\NewsAggregator.DataAccess.csproj", "{82E29162-6ABF-407F-BDB2-9ED07563B0D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.DataAccess", "NewsAggregator.DataAccess\NewsAggregator.DataAccess.csproj", "{82E29162-6ABF-407F-BDB2-9ED07563B0D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.Domain", "NewsAggregator.Domain\NewsAggregator.Domain.csproj", "{A921CECC-E315-4188-AEE4-2DE4CF805371}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.Domain", "NewsAggregator.Domain\NewsAggregator.Domain.csproj", "{A921CECC-E315-4188-AEE4-2DE4CF805371}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.InterfaceModels", "NewsAggregator.InterfaceModels\NewsAggregator.InterfaceModels.csproj", "{B1556F3E-A513-42AA-A639-A2404F8F3A11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.InterfaceModels", "NewsAggregator.InterfaceModels\NewsAggregator.InterfaceModels.csproj", "{B1556F3E-A513-42AA-A639-A2404F8F3A11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.Mappers", "NewsAggregator.Mappers\NewsAggregator.Mappers.csproj", "{863CAFA5-06CC-4647-95A4-FC813B6C6D3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.Mappers", "NewsAggregator.Mappers\NewsAggregator.Mappers.csproj", "{863CAFA5-06CC-4647-95A4-FC813B6C6D3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.Services", "NewsAggregator.Services\NewsAggregator.Services.csproj", "{B1A95188-CE95-4394-B92D-23921F412D00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.Services", "NewsAggregator.Services\NewsAggregator.Services.csproj", "{B1A95188-CE95-4394-B92D-23921F412D00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.Utilities", "NewsAggregator.Utilities\NewsAggregator.Utilities.csproj", "{83D6DF88-A3BB-47E4-B699-EFC265317B4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.Utilities", "NewsAggregator.Utilities\NewsAggregator.Utilities.csproj", "{83D6DF88-A3BB-47E4-B699-EFC265317B4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.Exceptions", "NewsAggregator.Exceptions\NewsAggregator.Exceptions.csproj", "{4ACF7CB9-C67C-4168-8714-2013E0FC927C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.Configurations", "NewsAggregator.Configurations\NewsAggregator.Configurations.csproj", "{50FFED0F-1612-4FC9-B67D-E3E74793D22B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.Helpers", "NewsAggregator\NewsAggregator.Helpers.csproj", "{2A2C0A5C-BF9E-4ACD-ADBF-E58FA25F8A6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +57,18 @@ Global
 		{83D6DF88-A3BB-47E4-B699-EFC265317B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83D6DF88-A3BB-47E4-B699-EFC265317B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83D6DF88-A3BB-47E4-B699-EFC265317B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ACF7CB9-C67C-4168-8714-2013E0FC927C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ACF7CB9-C67C-4168-8714-2013E0FC927C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ACF7CB9-C67C-4168-8714-2013E0FC927C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ACF7CB9-C67C-4168-8714-2013E0FC927C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50FFED0F-1612-4FC9-B67D-E3E74793D22B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50FFED0F-1612-4FC9-B67D-E3E74793D22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50FFED0F-1612-4FC9-B67D-E3E74793D22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50FFED0F-1612-4FC9-B67D-E3E74793D22B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A2C0A5C-BF9E-4ACD-ADBF-E58FA25F8A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A2C0A5C-BF9E-4ACD-ADBF-E58FA25F8A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A2C0A5C-BF9E-4ACD-ADBF-E58FA25F8A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A2C0A5C-BF9E-4ACD-ADBF-E58FA25F8A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

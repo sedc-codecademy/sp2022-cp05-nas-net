@@ -1,26 +1,27 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using NewsAggregator.DataAccess;
 using NewsAggregator.DataAccess.Abstraction;
 using NewsAggregator.DataAccess.Repositories;
 using NewsAggregator.Domain.Entities;
 using NewsAggregator.Services.Abstraction;
 using NewsAggregator.Services.Implementation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewsAggregator.Utilities
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection RegisterModule(this IServiceCollection services)
+        public static IServiceCollection RegisterModule(this IServiceCollection services, string connectionString)
         {
+            services.AddDbContext<NewsAggregatorDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
             //Services
-            services.AddTransient<IPlaceholderService, PlaceholderService>();
+            services.AddTransient<IUserService, UserService>();
 
             //Repositories
-            services.AddTransient<IRepository<Placeholder>, PlaceholderStaticRepository>();
+            services.AddTransient<IRepository<User>, UserRepository>();
 
             return services;
         }

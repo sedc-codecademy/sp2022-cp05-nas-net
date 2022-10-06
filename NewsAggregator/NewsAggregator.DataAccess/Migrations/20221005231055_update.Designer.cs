@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewsAggregator.DataAccess;
 
@@ -11,9 +12,10 @@ using NewsAggregator.DataAccess;
 namespace NewsAggregator.DataAccess.Migrations
 {
     [DbContext(typeof(NewsAggregatorDbContext))]
-    partial class NewsAggregatorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221005231055_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,6 +37,34 @@ namespace NewsAggregator.DataAccess.Migrations
                     b.HasIndex("CategoriesId");
 
                     b.ToTable("ArticleCategory");
+                });
+
+            modelBuilder.Entity("NewsAggregator.Domain.Entities.ApprovalRating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dislike")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Like")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId")
+                        .IsUnique();
+
+                    b.ToTable("ApprovalRatings");
                 });
 
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Article", b =>
@@ -85,7 +115,7 @@ namespace NewsAggregator.DataAccess.Migrations
                         {
                             Id = 1,
                             Content = "testestestestestes",
-                            DatePublished = new DateTime(2022, 10, 6, 19, 59, 16, 869, DateTimeKind.Local).AddTicks(2401),
+                            DatePublished = new DateTime(2022, 10, 6, 1, 10, 54, 561, DateTimeKind.Local).AddTicks(6906),
                             Description = "test",
                             ImageUrl = "https://cdn.theathletic.com/cdn-cgi/image/width=770,format=auto/https://cdn.theathletic.com/app/uploads/2022/09/07021831/ERLING-HAALAND-MANCHESTER-CITY-scaled-e1662531544452-1024x683.jpg",
                             OriginalArticleUrl = "https://theathletic.com/3571283/2022/09/07/manchester-city-erling-haaland-one-touch/",
@@ -150,6 +180,12 @@ namespace NewsAggregator.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("ApprovalRatingId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ApprovalRatingId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -174,6 +210,10 @@ namespace NewsAggregator.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApprovalRatingId");
+
+                    b.HasIndex("ApprovalRatingId1");
 
                     b.ToTable("User", (string)null);
 
@@ -235,6 +275,17 @@ namespace NewsAggregator.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NewsAggregator.Domain.Entities.ApprovalRating", b =>
+                {
+                    b.HasOne("NewsAggregator.Domain.Entities.Article", "Article")
+                        .WithOne("ApprovalRatings")
+                        .HasForeignKey("NewsAggregator.Domain.Entities.ApprovalRating", "ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+                });
+
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Comment", b =>
                 {
                     b.HasOne("NewsAggregator.Domain.Entities.Article", "Article")
@@ -254,8 +305,28 @@ namespace NewsAggregator.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("NewsAggregator.Domain.Entities.User", b =>
+                {
+                    b.HasOne("NewsAggregator.Domain.Entities.ApprovalRating", null)
+                        .WithMany("UsersDisliked")
+                        .HasForeignKey("ApprovalRatingId");
+
+                    b.HasOne("NewsAggregator.Domain.Entities.ApprovalRating", null)
+                        .WithMany("UsersLiked")
+                        .HasForeignKey("ApprovalRatingId1");
+                });
+
+            modelBuilder.Entity("NewsAggregator.Domain.Entities.ApprovalRating", b =>
+                {
+                    b.Navigation("UsersDisliked");
+
+                    b.Navigation("UsersLiked");
+                });
+
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Article", b =>
                 {
+                    b.Navigation("ApprovalRatings");
+
                     b.Navigation("ArticleComments");
                 });
 #pragma warning restore 612, 618

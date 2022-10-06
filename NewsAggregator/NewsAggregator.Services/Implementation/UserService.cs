@@ -55,7 +55,7 @@ namespace NewsAggregator.Services.Implementation
                             new Claim(ClaimTypes.Role , user.IsAdmin ? "admin" : "user")
                        }
                    ),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -128,6 +128,8 @@ namespace NewsAggregator.Services.Implementation
                 throw new UserException(404, id, $"User with Id:{id} does not exist");
             }
             _userRepository.Delete(user);
+            List<int> nums = new List<int> { 1, 2, 3, 4 };
+            
         }
 
 

@@ -35,6 +35,7 @@ namespace NewsAggregator.DataAccess
                 { Id=1});
 
             builder.Entity<User>(x => x.ToTable("User"));
+            builder.Entity<Article>(x => x.ToTable("Article"));
         }
     }
 }

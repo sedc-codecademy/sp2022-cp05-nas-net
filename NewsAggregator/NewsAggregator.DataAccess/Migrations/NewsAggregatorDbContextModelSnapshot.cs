@@ -85,7 +85,7 @@ namespace NewsAggregator.DataAccess.Migrations
                         {
                             Id = 1,
                             Content = "testestestestestes",
-                            DatePublished = new DateTime(2022, 10, 6, 19, 59, 16, 869, DateTimeKind.Local).AddTicks(2401),
+                            DatePublished = new DateTime(2022, 10, 7, 17, 21, 15, 905, DateTimeKind.Local).AddTicks(8471),
                             Description = "test",
                             ImageUrl = "https://cdn.theathletic.com/cdn-cgi/image/width=770,format=auto/https://cdn.theathletic.com/app/uploads/2022/09/07021831/ERLING-HAALAND-MANCHESTER-CITY-scaled-e1662531544452-1024x683.jpg",
                             OriginalArticleUrl = "https://theathletic.com/3571283/2022/09/07/manchester-city-erling-haaland-one-touch/",

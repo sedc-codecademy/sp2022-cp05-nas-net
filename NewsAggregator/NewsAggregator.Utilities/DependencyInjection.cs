@@ -18,10 +18,17 @@ namespace NewsAggregator.Utilities
                 options.UseSqlServer(connectionString);
             });
             //Services
-            services.AddTransient<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IArticleService, ArticleService>();
 
             //Repositories
-            services.AddTransient<IRepository<User>, BaseRepository<User>>();
+            //services.AddTransient<IRepository<User>, BaseRepository<User>>();
+            //services.AddScoped<IRepository<Article>, BaseRepository<Article>>();
+            //services.AddScoped<IRepository<Comment>, BaseRepository<Comment>>();
+            
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             return services;
         }

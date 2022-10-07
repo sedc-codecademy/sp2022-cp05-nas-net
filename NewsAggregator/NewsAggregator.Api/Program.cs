@@ -65,9 +65,7 @@ builder.Services.AddSwaggerGen(opt =>
 });
 
 builder.Services.RegisterModule(appSettings.ConnectionString);
-builder.Services.AddScoped<IArticleService, ArticleService>();
-builder.Services.AddScoped<IRepository<Article>, BaseRepository<Article>>();
-builder.Services.AddScoped<IRepository<Comment>, BaseRepository<Comment>>();
+
 
 var app = builder.Build();
 

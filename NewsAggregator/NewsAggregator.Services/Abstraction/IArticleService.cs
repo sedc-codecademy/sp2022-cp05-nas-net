@@ -1,15 +1,12 @@
 ﻿using NewsAggregator.InterfaceModels.Models.Article;
+using NewsAggregator.InterfaceModels.Models.Comment;
 
 namespace NewsAggregator.Services.Abstraction
 {
     public interface IArticleService
     {
+        List<ArticleDto> GetArticles();
         ArticleDto GetArticle(int id);
-        IEnumerable<ArticleDto> GetArticles();
-        void CreateArticle();
         void DeleteArticle(int id);
-        CommentDto AddComment(AddCommentDto dto, int id, int articleId);
-        IEnumerable<CommentDto> GetUserComments(int userId);
-        void DeleteComment(int id, int userId);
     }
 }

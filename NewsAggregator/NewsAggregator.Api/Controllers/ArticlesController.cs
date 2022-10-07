@@ -19,17 +19,24 @@ namespace NewsAggregator.Api.Controllers
         {
             _articleService = articleService;
         }
+        
+        //TODO : 
+
+        //GET BY CATEGORY
+
+        //GET BY SEARCH RESULT
+
 
         [AllowAnonymous]
         [HttpGet("articles")]
-        public ActionResult<IEnumerable<ArticleDto>> GetArticles()
+        public IActionResult GetArticles()
         {
             return Ok(_articleService.GetArticles());
         } // TODO - Backend pagination logic
 
         [AllowAnonymous]
         [HttpGet("articles/{id:int}")]
-        public ActionResult<ArticleDto> GetArticle([FromRoute] int id)
+        public IActionResult GetArticle([FromRoute] int id)
         {
             try
             {
@@ -43,68 +50,18 @@ namespace NewsAggregator.Api.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost("delete")]
-        public ActionResult DeleteArticle([FromRoute] int id)
+        public IActionResult DeleteArticle([FromRoute] int id)
         {
             try
             {
                 _articleService.DeleteArticle(id);
                 return Ok();
             }
-            catch(Exception ex)
-            {
-                return Unauthorized(ex.Message);
-            }
-        }
-
-        [Authorize(Roles = "user")]
-        [HttpPost("comment")]
-        public ActionResult<CommentDto> AddComment([FromBody] AddCommentDto dto, int articleId)
-        {
-            var id = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            try
-            {
-                return Ok(_articleService.AddComment(dto, id, articleId));
-            } 
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [Authorize(Roles = "user,admin")]
-        [HttpGet("user-comments")]
-        public ActionResult<IEnumerable<CommentDto>> GetUserComments(int userIdByAdmin = 0)
-        {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            var id = User.FindFirstValue(ClaimTypes.Role) == "user" ? userId : userIdByAdmin;
-
-            try
-            {
-                return Ok(_articleService.GetUserComments(id));
-            }
             catch (Exception ex)
             {
                 return Unauthorized(ex.Message);
             }
         }
 
-        [Authorize(Roles = "user,admin")]
-        [HttpPost("delete-comment")]
-        public ActionResult DeleteComment(int commentId)
-        {
-            var id = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            try
-            {
-                _articleService.DeleteComment(commentId, id);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return Unauthorized(ex.Message);
-            }
-        }
     }
 }

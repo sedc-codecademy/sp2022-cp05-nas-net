@@ -23,10 +23,10 @@ namespace NewsAggregator.Services.Implementation
     public class UserService : IUserService
     {
 
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly AppSettings _appSettings;
 
-        public UserService(IRepository<User> userRepository, IOptions<AppSettings> appSettings)
+        public UserService(IUserRepository userRepository, IOptions<AppSettings> appSettings)
         {
             _userRepository = userRepository;
             _appSettings = appSettings.Value;

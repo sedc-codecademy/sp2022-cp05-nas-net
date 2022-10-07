@@ -1,4 +1,6 @@
-﻿namespace NewsAggregator.InterfaceModels.Models.Article
+﻿using NewsAggregator.InterfaceModels.Models.Comment;
+
+namespace NewsAggregator.InterfaceModels.Models.Article
 {
     public class ArticleDto
     {

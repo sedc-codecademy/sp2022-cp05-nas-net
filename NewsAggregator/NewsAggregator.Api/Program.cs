@@ -1,6 +1,12 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using NewsAggregator.Configurations;
+using NewsAggregator.DataAccess.Abstraction;
+using NewsAggregator.DataAccess.Repositories;
+using NewsAggregator.Domain.Entities;
+using NewsAggregator.Services.Abstraction;
+using NewsAggregator.Services.Implementation;
 using NewsAggregator.Utilities;
 using System.Text;
 
@@ -33,9 +39,35 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opt =>
+{
+    opt.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization Header",
+        Type = SecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme
+    });
+
+    opt.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme()
+            {
+                Reference = new OpenApiReference
+                {
+                    Id = JwtBearerDefaults.AuthenticationScheme,
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            new List<string>()
+        }
+    });
+});
 
 builder.Services.RegisterModule(appSettings.ConnectionString);
+builder.Services.AddScoped<IArticleService, ArticleService>();
+builder.Services.AddScoped<IRepository<Article>, BaseRepository<Article>>();
+builder.Services.AddScoped<IRepository<Comment>, BaseRepository<Comment>>();
 
 var app = builder.Build();
 

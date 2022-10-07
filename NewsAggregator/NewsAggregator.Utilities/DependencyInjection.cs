@@ -21,7 +21,7 @@ namespace NewsAggregator.Utilities
             services.AddTransient<IUserService, UserService>();
 
             //Repositories
-            services.AddTransient<IRepository<User>, UserRepository>();
+            services.AddTransient<IRepository<User>, BaseRepository<User>>();
 
             return services;
         }

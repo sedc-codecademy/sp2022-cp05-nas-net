@@ -1,21 +1,16 @@
 ﻿using NewsAggregator.InterfaceModels.Models.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewsAggregator.Domain.Entities
 {
-    public class User
+    public class User : IEntity
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public bool IsAdmin { get; set; } = false;
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public bool IsAdmin { get; set; }
         public User() { }
         public User(string firstName, string lastName, string username, string email, string password)
         {
@@ -37,6 +32,18 @@ namespace NewsAggregator.Domain.Entities
         public void ChangePassword(string hashedPassword)
         {
             Password = hashedPassword;
+        }
+
+        public Comment AddComment(string comment, Article article)
+        {
+            if(article == null)
+            {
+                throw new Exception("Article not found");
+            }
+
+            Comment addComment = new(comment, article, article.Id, this, Id);
+
+            return addComment;
         }
     }
 }

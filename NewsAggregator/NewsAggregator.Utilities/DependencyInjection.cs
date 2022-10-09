@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NewsAggregator.DataAccess;
 using NewsAggregator.DataAccess.Abstraction;
@@ -19,6 +19,21 @@ namespace NewsAggregator.Utilities
                 options.UseSqlServer(connectionString);
             });
             //Services
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<IAdService, AdService>();
+
+            //Repositories
+            //services.AddTransient<IRepository<User>, BaseRepository<User>>();
+            //services.AddScoped<IRepository<Article>, BaseRepository<Article>>();
+            //services.AddScoped<IRepository<Comment>, BaseRepository<Comment>>();
+            
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IAdRepository, AdRepository>();
+
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IArticleService, ArticleService>();
             services.AddTransient<IRSSFeedService, RSSFeedService>();
@@ -35,6 +50,7 @@ namespace NewsAggregator.Utilities
             services.AddTransient<IArticleRepository, ArticleRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IRSSFeedRepository, RSSFeedRepository>();
+
 
             return services;
         }

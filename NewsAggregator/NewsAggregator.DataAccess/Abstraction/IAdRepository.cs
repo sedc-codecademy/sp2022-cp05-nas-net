@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator.DataAccess.Abstraction
 {
-    internal interface IAdRepository
+    public interface IAdRepository
     {
     }
 }

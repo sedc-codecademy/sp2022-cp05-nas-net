@@ -15,7 +15,9 @@ namespace NewsAggregator.DataAccess
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Ad> Ads { get; set; }
+        public DbSet<Ad> Ads { get; set; )
+
+        public DbSet<RSSFeed> RssFeeds { get; set; }
 
         public NewsAggregatorDbContext(DbContextOptions<NewsAggregatorDbContext> options) : base(options)
         {
@@ -30,11 +32,35 @@ namespace NewsAggregator.DataAccess
                 new User("Jill", "Admin", "adminJill", "jill@admin.com", PasswordHasher.HashPassword("admin123")) { Id = 4, IsAdmin = true }
                 );
 
-            builder.Entity<Article>().HasData(
-                new Article("test", "test",
-                "https://cdn.theathletic.com/cdn-cgi/image/width=770,format=auto/https://cdn.theathletic.com/app/uploads/2022/09/07021831/ERLING-HAALAND-MANCHESTER-CITY-scaled-e1662531544452-1024x683.jpg",
-                "https://theathletic.com/3571283/2022/09/07/manchester-city-erling-haaland-one-touch/", "https://theathletic.com", "https://theathletic.com/app/themes/athletic/assets/img/open-graph-asset.png", "testestestestestes", DateTime.Now)
-                { Id=1});
+            builder.Entity<Category>().HasData(
+                    new Category("Politics") { Id = 1 },
+                    new Category("Business") { Id = 2 },
+                    new Category("Science") { Id = 3 },
+                    new Category("Tech") { Id = 4 },
+                    new Category("Gaming") { Id = 5 },
+                    new Category("Showbiz") { Id = 6 },
+                    new Category("Sport") { Id = 7 },
+                    new Category("Other") { Id = 8 }
+                );
+
+            builder.Entity<RSSFeed>().HasData(
+
+                new RSSFeed("https://moxie.foxnews.com/google-publisher/politics.xml", 1) { Id = 1 },
+                new RSSFeed("https://moxie.foxnews.com/google-publisher/science.xml", 3) { Id = 2 },
+                new RSSFeed("https://moxie.foxnews.com/google-publisher/tech.xml", 4) { Id = 3 },
+                new RSSFeed("https://moxie.foxnews.com/google-publisher/sports.xml", 7) { Id = 4 },
+                new RSSFeed(" https://moxie.foxnews.com/google-publisher/travel.xml", 8) { Id = 5 },
+                new RSSFeed(" https://moxie.foxnews.com/google-publisher/health.xml", 8) { Id = 6 },
+
+                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Business.xml", 2) { Id = 7 },
+                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Science.xml", 3) { Id = 8 },
+                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml", 4) { Id = 9 },
+                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml", 7) { Id = 10 },
+                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Health.xml", 8) { Id = 11 },
+                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Travel.xml", 8) { Id = 12 }
+
+                );
+
 
             builder.Entity<Ad>().HasData(
                 new Ad("https://www.somagnews.com/wp-content/uploads/2021/12/Netflix-1.jpg", "https://www.netflix.com/mk/", "Netflix", true) { Id = 1 });
@@ -43,6 +69,11 @@ namespace NewsAggregator.DataAccess
             builder.Entity<User>(x => x.ToTable("User"));
             builder.Entity<Article>(x => x.ToTable("Article"));
             builder.Entity<Ad>(x => x.ToTable("Ad"));
+            builder.Entity<Comment>(x => x.ToTable("Comment"));
+            builder.Entity<Category>(x => x.ToTable("Category"));
+            builder.Entity<RSSFeed>(x => x.ToTable("RSSFeed"));
+
+
         }
     }
 }

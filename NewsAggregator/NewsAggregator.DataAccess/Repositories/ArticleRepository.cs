@@ -1,4 +1,5 @@
-﻿using NewsAggregator.DataAccess.Abstraction;
+﻿using Microsoft.EntityFrameworkCore;
+using NewsAggregator.DataAccess.Abstraction;
 using NewsAggregator.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace NewsAggregator.DataAccess.Repositories
         }
         public IQueryable<Article> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Articles;
         }
 
         public Article? GetById(int id)
@@ -29,6 +30,17 @@ namespace NewsAggregator.DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
+        public async Task CreateMany(List<Article> entities)
+        {
+            foreach (var entity in entities)
+            {
+                if (_dbContext.Articles.All(x => x.OriginalArticleUrl != entity.OriginalArticleUrl) || _dbContext.Articles.Count() == 0)
+                {
+                    _dbContext.Articles.Add(entity);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+        }
         public void Update(Article entity)
         {
             throw new NotImplementedException();
@@ -38,6 +50,5 @@ namespace NewsAggregator.DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
-    
     }
 }

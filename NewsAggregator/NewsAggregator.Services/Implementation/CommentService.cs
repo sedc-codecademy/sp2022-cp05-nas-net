@@ -13,12 +13,10 @@ namespace NewsAggregator.Services.Implementation
         {
             throw new NotImplementedException();
         }
-
         public void Delete()
         {
             throw new NotImplementedException();
         }
-
         public void Update()
         {
             throw new NotImplementedException();

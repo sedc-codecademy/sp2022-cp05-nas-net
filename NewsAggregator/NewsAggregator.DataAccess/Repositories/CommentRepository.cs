@@ -14,7 +14,6 @@ namespace NewsAggregator.DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
-
         public Comment? GetById(int id)
         {
             throw new NotImplementedException();
@@ -27,7 +26,6 @@ namespace NewsAggregator.DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
-
         public void Delete(Comment entity)
         {
             throw new NotImplementedException();

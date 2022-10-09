@@ -49,7 +49,7 @@ namespace NewsAggregator.Services.Implementation
             {
                 throw new RSSFeedException(404, id, $"RSS feed with ID : {id} does not exist");
             }
-            ValidateModel(model.Name, model.FeedUrl, model.CategoryId , id);
+            ValidateModel(model.Name, model.FeedUrl, model.CategoryId, id);
             rssFeed.Update(model);
             _rssRepository.Update(rssFeed);
         }
@@ -104,5 +104,7 @@ namespace NewsAggregator.Services.Implementation
                 throw new CategoryException(404, categoryId, $"Category with ID:{categoryId} does not exist");
             }
         }
+
+        
     }
 }

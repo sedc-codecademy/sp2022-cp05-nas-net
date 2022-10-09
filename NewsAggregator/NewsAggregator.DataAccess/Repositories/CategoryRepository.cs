@@ -20,12 +20,10 @@ namespace NewsAggregator.DataAccess.Repositories
         {
             return _dbContext.Categories;
         }
-
         public Category? GetById(int id)
         {
             return _dbContext.Categories.SingleOrDefault(x => x.Id == id);
         }
-
         public void Create(Category entity)
         {
             _dbContext.Categories.Add(entity);

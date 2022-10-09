@@ -364,7 +364,7 @@ namespace NewsAggregator.DataAccess.Migrations
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Article", b =>
                 {
                     b.HasOne("NewsAggregator.Domain.Entities.Category", "Category")
-                        .WithMany("Articles")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -405,11 +405,6 @@ namespace NewsAggregator.DataAccess.Migrations
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Article", b =>
                 {
                     b.Navigation("ArticleComments");
-                });
-
-            modelBuilder.Entity("NewsAggregator.Domain.Entities.Category", b =>
-                {
-                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

@@ -21,7 +21,6 @@ namespace NewsAggregator.DataAccess.Repositories
         {
             return _dbContext.Articles;
         }
-
         public Article? GetById(int id)
         {
             throw new NotImplementedException();
@@ -45,7 +44,6 @@ namespace NewsAggregator.DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
-
         public void Delete(Article entity)
         {
             throw new NotImplementedException();

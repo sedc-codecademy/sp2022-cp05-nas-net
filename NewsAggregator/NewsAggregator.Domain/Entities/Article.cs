@@ -1,14 +1,15 @@
-﻿namespace NewsAggregator.Domain.Entities
+﻿using NewsAggregator.Domain.Interfaces;
+
+namespace NewsAggregator.Domain.Entities
 {
     public class Article : IEntity
     {
-        private string text1;
-        private string text2;
-        private string id1;
-        private Uri uri;
-        private int id2;
-        private DateTime dateTime;
-
+        //private string text1;
+        //private string text2;
+        //private string id1;
+        //private Uri uri;
+        //private int id2;
+        //private DateTime dateTime;
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -33,14 +34,14 @@
             DatePublished = datePublished;
         }
 
-        public Article(string text1, string text2, string id1, Uri uri, int id2, DateTime dateTime)
-        {
-            this.text1 = text1;
-            this.text2 = text2;
-            this.id1 = id1;
-            this.uri = uri;
-            this.id2 = id2;
-            this.dateTime = dateTime;
-        }
+        //public Article(string text1, string text2, string id1, Uri uri, int id2, DateTime dateTime)
+        //{
+        //    this.text1 = text1;
+        //    this.text2 = text2;
+        //    this.id1 = id1;
+        //    this.uri = uri;
+        //    this.id2 = id2;
+        //    this.dateTime = dateTime;
+        //}
     }
 }

@@ -20,12 +20,10 @@ namespace NewsAggregator.Services.Implementation
         private readonly PeriodicTimer _timer = new(TimeSpan.FromHours(5));
 
         private readonly IServiceProvider _serviceProvider;
-
         public RSSReaderBackgroundService(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
-
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
 
@@ -36,7 +34,6 @@ namespace NewsAggregator.Services.Implementation
                 await GetRssFeedData();
             }
         }
-
         private async Task GetRssFeedData()
         {
             try
@@ -85,7 +82,6 @@ namespace NewsAggregator.Services.Implementation
                 Console.WriteLine("Something went wrong");
             }
         }
-
         private List<string> GetArticleImageUrls(string feedUrl)
         {
             XDocument xDoc = XDocument.Load(feedUrl);

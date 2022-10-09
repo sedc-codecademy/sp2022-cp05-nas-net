@@ -12,7 +12,7 @@ using NewsAggregator.DataAccess;
 namespace NewsAggregator.DataAccess.Migrations
 {
     [DbContext(typeof(NewsAggregatorDbContext))]
-    [Migration("20221008231547_init")]
+    [Migration("20221009164725_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,6 +176,10 @@ namespace NewsAggregator.DataAccess.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -188,84 +192,96 @@ namespace NewsAggregator.DataAccess.Migrations
                             Id = 1,
                             CategoryId = 1,
                             FeedUrl = "https://moxie.foxnews.com/google-publisher/politics.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "Fox news - bussines"
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 3,
                             FeedUrl = "https://moxie.foxnews.com/google-publisher/science.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "Fox news - science"
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 4,
                             FeedUrl = "https://moxie.foxnews.com/google-publisher/tech.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "Fox news - technology"
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 7,
                             FeedUrl = "https://moxie.foxnews.com/google-publisher/sports.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "Fox news - sports"
                         },
                         new
                         {
                             Id = 5,
                             CategoryId = 8,
                             FeedUrl = " https://moxie.foxnews.com/google-publisher/travel.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "Fox news - travel"
                         },
                         new
                         {
                             Id = 6,
                             CategoryId = 8,
                             FeedUrl = " https://moxie.foxnews.com/google-publisher/health.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "Fox news - health"
                         },
                         new
                         {
                             Id = 7,
                             CategoryId = 2,
                             FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "New York Times - bussines"
                         },
                         new
                         {
                             Id = 8,
                             CategoryId = 3,
                             FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Science.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "New York Times - science"
                         },
                         new
                         {
                             Id = 9,
                             CategoryId = 4,
                             FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "New York Times - tehcnology"
                         },
                         new
                         {
                             Id = 10,
                             CategoryId = 7,
                             FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "New York Times - sports"
                         },
                         new
                         {
                             Id = 11,
                             CategoryId = 8,
                             FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Health.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "New York Times - health"
                         },
                         new
                         {
                             Id = 12,
                             CategoryId = 8,
                             FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Travel.xml",
-                            IsActive = true
+                            IsActive = true,
+                            Name = "New York Times - travel"
                         });
                 });
 

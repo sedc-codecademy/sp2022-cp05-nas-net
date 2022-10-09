@@ -42,19 +42,19 @@ namespace NewsAggregator.DataAccess
 
             builder.Entity<RSSFeed>().HasData(
 
-                new RSSFeed("https://moxie.foxnews.com/google-publisher/politics.xml", 1) { Id = 1 },
-                new RSSFeed("https://moxie.foxnews.com/google-publisher/science.xml", 3) { Id = 2 },
-                new RSSFeed("https://moxie.foxnews.com/google-publisher/tech.xml", 4) { Id = 3 },
-                new RSSFeed("https://moxie.foxnews.com/google-publisher/sports.xml", 7) { Id = 4 },
-                new RSSFeed(" https://moxie.foxnews.com/google-publisher/travel.xml", 8) { Id = 5 },
-                new RSSFeed(" https://moxie.foxnews.com/google-publisher/health.xml", 8) { Id = 6 },
+                new RSSFeed("Fox news - bussines", "https://moxie.foxnews.com/google-publisher/politics.xml", 1) { Id = 1 },
+                new RSSFeed("Fox news - science", "https://moxie.foxnews.com/google-publisher/science.xml", 3) { Id = 2 },
+                new RSSFeed("Fox news - technology", "https://moxie.foxnews.com/google-publisher/tech.xml", 4) { Id = 3 },
+                new RSSFeed("Fox news - sports", "https://moxie.foxnews.com/google-publisher/sports.xml", 7) { Id = 4 },
+                new RSSFeed("Fox news - travel", " https://moxie.foxnews.com/google-publisher/travel.xml", 8) { Id = 5 },
+                new RSSFeed("Fox news - health", " https://moxie.foxnews.com/google-publisher/health.xml", 8) { Id = 6 },
 
-                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Business.xml", 2) { Id = 7 },
-                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Science.xml", 3) { Id = 8 },
-                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml", 4) { Id = 9 },
-                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml", 7) { Id = 10 },
-                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Health.xml", 8) { Id = 11 },
-                new RSSFeed("https://rss.nytimes.com/services/xml/rss/nyt/Travel.xml", 8) { Id = 12 }
+                new RSSFeed("New York Times - bussines", "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml", 2) { Id = 7 },
+                new RSSFeed("New York Times - science", "https://rss.nytimes.com/services/xml/rss/nyt/Science.xml", 3) { Id = 8 },
+                new RSSFeed("New York Times - tehcnology", "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml", 4) { Id = 9 },
+                new RSSFeed("New York Times - sports", "https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml", 7) { Id = 10 },
+                new RSSFeed("New York Times - health", "https://rss.nytimes.com/services/xml/rss/nyt/Health.xml", 8) { Id = 11 },
+                new RSSFeed("New York Times - travel", "https://rss.nytimes.com/services/xml/rss/nyt/Travel.xml", 8) { Id = 12 }
 
                 );
 

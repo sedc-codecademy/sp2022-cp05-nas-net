@@ -15,6 +15,8 @@ namespace NewsAggregator.DataAccess
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Ad> Ads { get; set; }
+
         public NewsAggregatorDbContext(DbContextOptions<NewsAggregatorDbContext> options) : base(options)
         {
         }
@@ -34,8 +36,13 @@ namespace NewsAggregator.DataAccess
                 "https://theathletic.com/3571283/2022/09/07/manchester-city-erling-haaland-one-touch/", "https://theathletic.com", "https://theathletic.com/app/themes/athletic/assets/img/open-graph-asset.png", "testestestestestes", DateTime.Now)
                 { Id=1});
 
+            builder.Entity<Ad>().HasData(
+                new Ad("https://www.somagnews.com/wp-content/uploads/2021/12/Netflix-1.jpg", "https://www.netflix.com/mk/", "Netflix", true) { Id = 1 });
+
+
             builder.Entity<User>(x => x.ToTable("User"));
             builder.Entity<Article>(x => x.ToTable("Article"));
+            builder.Entity<Ad>(x => x.ToTable("Ad"));
         }
     }
 }

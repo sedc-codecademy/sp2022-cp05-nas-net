@@ -20,6 +20,7 @@ namespace NewsAggregator.Utilities
             //Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<IAdService, AdService>();
 
             //Repositories
             //services.AddTransient<IRepository<User>, BaseRepository<User>>();
@@ -29,6 +30,7 @@ namespace NewsAggregator.Utilities
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IArticleRepository, ArticleRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IAdRepository, AdRepository>();
 
             return services;
         }

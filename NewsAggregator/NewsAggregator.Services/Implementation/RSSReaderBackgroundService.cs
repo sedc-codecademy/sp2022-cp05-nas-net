@@ -86,11 +86,6 @@ namespace NewsAggregator.Services.Implementation
             }
         }
 
-        private string GetImageUrl(SyndicationItem item)
-        {
-            return item?.ElementExtensions?.Select(e => e?.GetObject<XElement>()?.Attribute("url")?.Value).First() ?? "Some basic url string";
-        }
-
         private List<string> GetArticleImageUrls(string feedUrl)
         {
             XDocument xDoc = XDocument.Load(feedUrl);

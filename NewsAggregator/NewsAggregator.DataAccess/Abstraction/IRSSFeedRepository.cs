@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator.DataAccess.Abstraction
 {
-    public interface IArticleRepository : IRepository<Article>
+    public interface IRSSFeedRepository :IRepository<RSSFeed>
     {
-        Task CreateMany(List<Article> entities);
     }
 }

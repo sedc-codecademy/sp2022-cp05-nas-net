@@ -12,7 +12,7 @@ using NewsAggregator.DataAccess;
 namespace NewsAggregator.DataAccess.Migrations
 {
     [DbContext(typeof(NewsAggregatorDbContext))]
-    [Migration("20221007152116_init")]
+    [Migration("20221008231547_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace NewsAggregator.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ArticleCategory", b =>
-                {
-                    b.Property<int>("ArticlesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ArticlesId", "CategoriesId");
-
-                    b.HasIndex("CategoriesId");
-
-                    b.ToTable("ArticleCategory");
-                });
-
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Article", b =>
                 {
                     b.Property<int>("Id")
@@ -47,9 +32,8 @@ namespace NewsAggregator.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DatePublished")
                         .HasColumnType("datetime2");
@@ -80,21 +64,9 @@ namespace NewsAggregator.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Articles");
+                    b.HasIndex("CategoryId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "testestestestestes",
-                            DatePublished = new DateTime(2022, 10, 7, 17, 21, 15, 905, DateTimeKind.Local).AddTicks(8471),
-                            Description = "test",
-                            ImageUrl = "https://cdn.theathletic.com/cdn-cgi/image/width=770,format=auto/https://cdn.theathletic.com/app/uploads/2022/09/07021831/ERLING-HAALAND-MANCHESTER-CITY-scaled-e1662531544452-1024x683.jpg",
-                            OriginalArticleUrl = "https://theathletic.com/3571283/2022/09/07/manchester-city-erling-haaland-one-touch/",
-                            SourceLogo = "https://theathletic.com/app/themes/athletic/assets/img/open-graph-asset.png",
-                            SourceUrl = "https://theathletic.com",
-                            Title = "test"
-                        });
+                    b.ToTable("Article", (string)null);
                 });
 
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Category", b =>
@@ -111,7 +83,49 @@ namespace NewsAggregator.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Politics"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Business"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Science"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Tech"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Gaming"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Showbiz"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Sport"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Other"
+                        });
                 });
 
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Comment", b =>
@@ -141,7 +155,118 @@ namespace NewsAggregator.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comment", (string)null);
+                });
+
+            modelBuilder.Entity("NewsAggregator.Domain.Entities.RSSFeed", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FeedUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("RSSFeed", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            FeedUrl = "https://moxie.foxnews.com/google-publisher/politics.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 3,
+                            FeedUrl = "https://moxie.foxnews.com/google-publisher/science.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 4,
+                            FeedUrl = "https://moxie.foxnews.com/google-publisher/tech.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 7,
+                            FeedUrl = "https://moxie.foxnews.com/google-publisher/sports.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 8,
+                            FeedUrl = " https://moxie.foxnews.com/google-publisher/travel.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 8,
+                            FeedUrl = " https://moxie.foxnews.com/google-publisher/health.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 2,
+                            FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 3,
+                            FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Science.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 4,
+                            FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 7,
+                            FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryId = 8,
+                            FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Health.xml",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryId = 8,
+                            FeedUrl = "https://rss.nytimes.com/services/xml/rss/nyt/Travel.xml",
+                            IsActive = true
+                        });
                 });
 
             modelBuilder.Entity("NewsAggregator.Domain.Entities.User", b =>
@@ -222,19 +347,15 @@ namespace NewsAggregator.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ArticleCategory", b =>
+            modelBuilder.Entity("NewsAggregator.Domain.Entities.Article", b =>
                 {
-                    b.HasOne("NewsAggregator.Domain.Entities.Article", null)
-                        .WithMany()
-                        .HasForeignKey("ArticlesId")
+                    b.HasOne("NewsAggregator.Domain.Entities.Category", "Category")
+                        .WithMany("Articles")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NewsAggregator.Domain.Entities.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Comment", b =>
@@ -256,9 +377,25 @@ namespace NewsAggregator.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("NewsAggregator.Domain.Entities.RSSFeed", b =>
+                {
+                    b.HasOne("NewsAggregator.Domain.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Article", b =>
                 {
                     b.Navigation("ArticleComments");
+                });
+
+            modelBuilder.Entity("NewsAggregator.Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

@@ -49,6 +49,7 @@ namespace NewsAggregator.Utilities
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IArticleRepository, ArticleRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IRSSFeedRepository, RSSFeedRepository>();
 
 

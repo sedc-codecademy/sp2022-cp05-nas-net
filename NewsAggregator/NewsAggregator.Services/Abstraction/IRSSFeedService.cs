@@ -10,8 +10,10 @@ namespace NewsAggregator.Services.Abstraction
     public interface IRSSFeedService
     {
         List<RSSFeedDto> GetAll();
-        void Create();
-        void Update();
-        void Delete();
+        RSSFeedDto GetById(int id);
+        void Create(CreateRSSFeedDto model);
+        void Update(UpdateRSSDto model , int id);
+        bool Toggle(int id);
+        void Delete(int id);
     }
 }

@@ -14,6 +14,7 @@ namespace NewsAggregator.Mappers
             return new RSSFeedDto
             {
                 Id = model.Id,
+                Name = model.Name,
                 FeedUrl = model.FeedUrl,
                 IsActive = model.IsActive,
                 Category = model.Category.ToCategoryDto()

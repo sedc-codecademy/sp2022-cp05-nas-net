@@ -1,4 +1,6 @@
 ﻿using NewsAggregator.DataAccess.Abstraction;
+using NewsAggregator.Domain.Entities;
+using NewsAggregator.Exceptions;
 using NewsAggregator.InterfaceModels.Models.RSSFeed;
 using NewsAggregator.Mappers;
 using NewsAggregator.Services.Abstraction;
@@ -13,26 +15,94 @@ namespace NewsAggregator.Services.Implementation
     public class RSSFeedService : IRSSFeedService
     {
         private readonly IRSSFeedRepository _rssRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public RSSFeedService(IRSSFeedRepository rssRepository)
+        public RSSFeedService(IRSSFeedRepository rssRepository, ICategoryRepository categoryRepository)
         {
             _rssRepository = rssRepository;
+            _categoryRepository = categoryRepository;
         }
+
         public List<RSSFeedDto> GetAll()
         {
             return _rssRepository.GetAll().Select(x => x.ToRSSFeedDto()).ToList();
         }
-        public void Create()
+        public RSSFeedDto GetById(int id)
         {
-            throw new NotImplementedException();
+            var item = _rssRepository.GetById(id);
+            if (item == null)
+            {
+                throw new RSSFeedException(404, id, $"RSS feed with ID : {id} does not exist");
+            }
+            return item.ToRSSFeedDto();
         }
-        public void Update()
+        public void Create(CreateRSSFeedDto model)
         {
-            throw new NotImplementedException();
+            ValidateModel(model.Name, model.FeedUrl, model.CategoryId);
+            var newRssFeed = new RSSFeed(model.Name, model.FeedUrl, model.CategoryId);
+            _rssRepository.Create(newRssFeed);
         }
-        public void Delete()
+        public void Update(UpdateRSSDto model, int id)
         {
-            throw new NotImplementedException();
+            var rssFeed = _rssRepository.GetById(id);
+            if (rssFeed == null)
+            {
+                throw new RSSFeedException(404, id, $"RSS feed with ID : {id} does not exist");
+            }
+            ValidateModel(model.Name, model.FeedUrl, model.CategoryId , id);
+            rssFeed.Update(model);
+            _rssRepository.Update(rssFeed);
+        }
+        public bool Toggle(int id)
+        {
+            var rssFeed = _rssRepository.GetById(id);
+            if (rssFeed == null)
+            {
+                throw new RSSFeedException(404, id, $"RSS feed with ID : {id} does not exist");
+            }
+            rssFeed.ToggleIsActive();
+            _rssRepository.Update(rssFeed);
+            return rssFeed.IsActive;
+        }
+
+        public void Delete(int id)
+        {
+            var rssFeed = _rssRepository.GetById(id);
+            if (rssFeed == null)
+            {
+                throw new RSSFeedException(404, id, $"RSS feed with ID : {id} does not exist");
+            }
+            _rssRepository.Delete(rssFeed);
+        }
+
+        private void ValidateModel(string name, string feedUrl, int categoryId, int rssId = 0)
+        {
+            var feeds = _rssRepository.GetAll();
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new RSSFeedException(401, "Rss feed name cannot be empty.");
+            }
+            if (feeds.Any(x => x.Name == name && x.Id != rssId))
+            {
+                throw new RSSFeedException(401, $"Rss feed with the name : \"{name}\" already exists.");
+            }
+            if (string.IsNullOrEmpty(feedUrl))
+            {
+                throw new RSSFeedException(401, "Rss feed url cannot be empty.");
+            }
+
+            if (!Uri.IsWellFormedUriString(feedUrl, UriKind.Absolute))
+            {
+                throw new RSSFeedException(401, "Invaid Rss feed url format.");
+            }
+            if (feeds.Any(x => x.FeedUrl == feedUrl && x.Id != rssId))
+            {
+                throw new RSSFeedException(401, $"Rss feed with the url : \"{feedUrl}\" already exists.");
+            }
+            if (_categoryRepository.GetById(categoryId) == null)
+            {
+                throw new CategoryException(404, categoryId, $"Category with ID:{categoryId} does not exist");
+            }
         }
     }
 }

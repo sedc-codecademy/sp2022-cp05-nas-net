@@ -1,27 +1,34 @@
-﻿using NewsAggregator.Services.Abstraction;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NewsAggregator.DataAccess.Abstraction;
+using NewsAggregator.InterfaceModels.Models.Comment;
+using NewsAggregator.Services.Abstraction;
 
 namespace NewsAggregator.Services.Implementation
 {
     public class CommentService : ICommentService
     {
-        public void Create()
+        private readonly ICommentRepository _commentRepository;
+
+        public CommentService(ICommentRepository commentRepository)
         {
-            throw new NotImplementedException();
+            _commentRepository = commentRepository;
         }
 
-        public void Delete()
+        public void Create(CommentDto comment)
         {
+
             throw new NotImplementedException();
         }
-
-        public void Update()
+        public void Update(CommentDto comment, int commentId)
         {
-            throw new NotImplementedException();
+            var entity = _commentRepository.GetById(commentId) ?? throw new Exception("Comment not found!");
+
+            _commentRepository.Update(entity);
+        }
+        public void Delete(int id)
+        {
+            var comment = _commentRepository.GetById(id) ?? throw new Exception("Comment not found!");
+
+            _commentRepository.Delete(comment);
         }
     }
 }

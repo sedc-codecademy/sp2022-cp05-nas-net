@@ -12,7 +12,8 @@ namespace NewsAggregator.Mappers
                 Id = article.Id,
                 Title = article.Title,
                 Description = article.Description,
-                ImageUrl = article.ImageUrl
+                ImageUrl = article.ImageUrl,
+                Category = article.Category.ToCategoryDto()
             };
         }
 
@@ -27,7 +28,8 @@ namespace NewsAggregator.Mappers
                 OriginalArticleUrl = article.OriginalArticleUrl,
                 SourceUrl = article.SourceUrl,
                 SourceLogo = article.SourceLogo,
-                DatePublished = article.DatePublished
+                DatePublished = article.DatePublished,
+                Category = article.Category.ToCategoryDto()
             };
         }
     }

@@ -22,7 +22,7 @@ namespace NewsAggregator.Services.Implementation
             _commentsRepository = commentsRepository;
             _userRepository = userRepository;
         }
-        public ArticleDto GetArticle(int id)
+        public ArticleDetailsDto GetArticle(int id)
         {
             var article = _articleRepository.GetAll()
                                             .Include(x => x.ArticleComments)
@@ -31,7 +31,7 @@ namespace NewsAggregator.Services.Implementation
                                             .FirstOrDefault()
                                             ?? throw new Exception("Article not found"); //TODO change to custom exception
 
-            var dto = article.ToArticleDto();
+            var dto = article.ToArticleDetailsDto();
 
             dto.Category = article.Category.ToCategoryDto();
            /* dto.CommentsDto = GetArticleComments(id);*/ //--> INCLUDE FROM ARTICLE REPOSITORY
@@ -40,7 +40,6 @@ namespace NewsAggregator.Services.Implementation
         }
         public List<ArticleDto> GetArticlesHomepage(int pageNum)
         {
-            //CommentsDto won't be needed since it's only for accessing a particular article.
             //Numbers of articles shown is based on the initial FE implementation, but can be changed depending on the current FE if needed.
             const int articlesShown = 5;
 
@@ -56,7 +55,6 @@ namespace NewsAggregator.Services.Implementation
 
         public List<ArticleDto> GetArticlesByCategory(string categoryName, int pageNum)
         {
-            //CommentsDto won't be needed since it's only for accessing a particular article.
             //Numbers of articles shown is based on the initial FE implementation, but can be changed depending on the current FE if needed.
             const int articlesShown = 10;
 
@@ -73,12 +71,10 @@ namespace NewsAggregator.Services.Implementation
         }
         public List<ArticleDto> GetArticlesBySearchValue(string searchValue, int pageNum)
         {
-            //CommentsDto won't be needed since it's only for accessing a particular article.
             //Numbers of articles shown is based on the initial FE implementation, but can be changed depending on the current FE if needed.
             const int articlesShown = 10;
 
             var articles = _articleRepository.GetAll()
-                                             .Include(x => x.Category)
                                              .Where(x => x.Title.Contains(searchValue) || x.Description.Contains(searchValue))
                                              .OrderByDescending(x => x.Id)
                                              .Skip(pageNum * articlesShown)

@@ -8,7 +8,7 @@ namespace NewsAggregator.Services.Abstraction
         List<ArticleDto> GetArticlesHomepage(int pageNum);
         List<ArticleDto> GetArticlesByCategory(string categoryName, int pageNum);
         List<ArticleDto> GetArticlesBySearchValue(string searchValue, int pageNum);
-        ArticleDto GetArticle(int id);
+        ArticleDetailsDto GetArticle(int id);
         void DeleteArticle(int id);
     }
 }

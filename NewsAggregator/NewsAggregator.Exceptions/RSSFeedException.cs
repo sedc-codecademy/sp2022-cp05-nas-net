@@ -10,7 +10,6 @@ namespace NewsAggregator.Exceptions
     {
         public int? RSSFeedId { get; set; }
         public int StatusCode { get; set; }
-
         public RSSFeedException(int statusCode, string message) : base(message)
         {
             StatusCode = statusCode;

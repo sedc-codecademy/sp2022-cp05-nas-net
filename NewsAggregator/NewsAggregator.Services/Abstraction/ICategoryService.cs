@@ -11,7 +11,7 @@ namespace NewsAggregator.Services.Abstraction
     {
         List<CategoryDto> GetAll();
         CategoryDto GetById(int id);
-        void Create(CreateCategoryDto model);
+        int Create(CreateCategoryDto model);
         void Update(UpdateCategoryDto model, int id);
         void Delete(int id);
     }

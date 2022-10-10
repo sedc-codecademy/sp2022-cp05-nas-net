@@ -33,11 +33,12 @@ namespace NewsAggregator.Services.Implementation
             }
             return item.ToCategoryDto();
         }
-        public void Create(CreateCategoryDto model)
+        public int Create(CreateCategoryDto model)
         {
             ValidateModel(model.Name);
             var category = new Category(model.Name.Capitalize());
             _categoryRepository.Create(category);
+            return category.Id;
         }
         public void Update(UpdateCategoryDto model, int id)
         {

@@ -22,7 +22,6 @@ namespace NewsAggregator.Services.Implementation
             _rssRepository = rssRepository;
             _categoryRepository = categoryRepository;
         }
-
         public List<RSSFeedDto> GetAll()
         {
             return _rssRepository.GetAll().Select(x => x.ToRSSFeedDto()).ToList();
@@ -36,11 +35,12 @@ namespace NewsAggregator.Services.Implementation
             }
             return item.ToRSSFeedDto();
         }
-        public void Create(CreateRSSFeedDto model)
+        public int Create(CreateRSSFeedDto model)
         {
             ValidateModel(model.Name, model.FeedUrl, model.CategoryId);
             var newRssFeed = new RSSFeed(model.Name, model.FeedUrl, model.CategoryId);
             _rssRepository.Create(newRssFeed);
+            return newRssFeed.Id;
         }
         public void Update(UpdateRSSDto model, int id)
         {

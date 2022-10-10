@@ -21,7 +21,6 @@ namespace NewsAggregator.Domain.Entities
             Email = email;
             Password = password;
         }
-
         public void Update(UpdateUserDto model)
         {
             FirstName = model.FirstName;
@@ -29,21 +28,17 @@ namespace NewsAggregator.Domain.Entities
             Username = model.Username;
             Email = model.Email;
         }
-
         public void ChangePassword(string hashedPassword)
         {
             Password = hashedPassword;
         }
-
         public Comment AddComment(string comment, Article article)
         {
             if(article == null)
             {
                 throw new Exception("Article not found");
             }
-
             Comment addComment = new(comment, article, article.Id, this, Id);
-
             return addComment;
         }
     }

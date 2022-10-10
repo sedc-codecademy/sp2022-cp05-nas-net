@@ -50,8 +50,8 @@ namespace NewsAggregator.Api.Controllers
         {
             try
             {
-                _categoryService.Create(model);
-                return Ok("Category created successfully");
+                var res = _categoryService.Create(model);
+                return Ok(res);
             }
             catch (UserException uex)
             {

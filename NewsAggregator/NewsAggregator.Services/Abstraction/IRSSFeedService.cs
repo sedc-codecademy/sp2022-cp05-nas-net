@@ -11,7 +11,7 @@ namespace NewsAggregator.Services.Abstraction
     {
         List<RSSFeedDto> GetAll();
         RSSFeedDto GetById(int id);
-        void Create(CreateRSSFeedDto model);
+        int Create(CreateRSSFeedDto model);
         void Update(UpdateRSSDto model , int id);
         bool Toggle(int id);
         void Delete(int id);

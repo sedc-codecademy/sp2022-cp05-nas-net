@@ -1,4 +1,5 @@
-﻿using NewsAggregator.InterfaceModels.Models.Comment;
+﻿using NewsAggregator.Domain.Entities;
+using NewsAggregator.InterfaceModels.Models.Comment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace NewsAggregator.Services.Abstraction
 {
     public interface ICommentService
     {
-        void Create(CommentDto comment);
-        void Update(CommentDto comment, int commentId);
+        void Create(Comment comment);
+        void Update(Comment comment, int commentId);
         void Delete(int id);
     }
 }

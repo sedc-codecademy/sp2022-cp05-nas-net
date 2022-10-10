@@ -1,5 +1,7 @@
 ﻿using NewsAggregator.DataAccess.Abstraction;
+using NewsAggregator.Domain.Entities;
 using NewsAggregator.InterfaceModels.Models.Comment;
+using NewsAggregator.Mappers;
 using NewsAggregator.Services.Abstraction;
 
 namespace NewsAggregator.Services.Implementation
@@ -13,12 +15,15 @@ namespace NewsAggregator.Services.Implementation
             _commentRepository = commentRepository;
         }
 
-        public void Create(CommentDto comment)
+        public void Create(Comment comment)
         {
-
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(comment.Content))
+            {
+                throw new Exception("Text field is required!");
+            }
+            _commentRepository.Create(comment);
         }
-        public void Update(CommentDto comment, int commentId)
+        public void Update(Comment comment, int commentId)
         {
             var entity = _commentRepository.GetById(commentId) ?? throw new Exception("Comment not found!");
 

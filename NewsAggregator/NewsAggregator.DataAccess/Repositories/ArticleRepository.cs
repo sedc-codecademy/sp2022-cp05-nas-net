@@ -23,7 +23,7 @@ namespace NewsAggregator.DataAccess.Repositories
         }
         public Article? GetById(int id)
         {
-            throw new NotImplementedException();
+            return GetAll().FirstOrDefault(x => x.Id == id);
         }
         public void Create(Article entity)
         {
@@ -42,11 +42,13 @@ namespace NewsAggregator.DataAccess.Repositories
         }
         public void Update(Article entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Update(entity);
+            _dbContext.SaveChanges();
         }
         public void Delete(Article entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Remove(entity);
+            _dbContext.SaveChanges();
         }
     }
 }

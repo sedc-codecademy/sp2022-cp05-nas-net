@@ -19,20 +19,27 @@ namespace NewsAggregator.Api.Controllers
         {
             _articleService = articleService;
         }
-        
-        //TODO : 
-
-        //GET BY CATEGORY
-
-        //GET BY SEARCH RESULT
-
 
         [AllowAnonymous]
-        [HttpGet("articles")]
-        public IActionResult GetArticles()
+        [HttpGet("home")]
+        public IActionResult GetArticles([FromQuery] int page = 0)
         {
-            return Ok(_articleService.GetArticles());
-        } // TODO - Backend pagination logic
+            return Ok(_articleService.GetArticlesHomepage(page));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("category")]
+        public IActionResult GetArticlesByCategory([FromQuery] string category, [FromQuery] int page = 0)
+        {
+            return Ok(_articleService.GetArticlesByCategory(category, page));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("search")]
+        public IActionResult GetArticlesBySearchValue([FromQuery] string search, [FromQuery] int page = 0)
+        {
+            return Ok(_articleService.GetArticlesBySearchValue(search, page));
+        }
 
         [AllowAnonymous]
         [HttpGet("articles/{id:int}")]

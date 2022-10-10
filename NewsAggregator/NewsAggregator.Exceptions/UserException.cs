@@ -10,7 +10,6 @@ namespace NewsAggregator.Exceptions
     {
         public int? UserId { get; set; }
         public int StatusCode { get; set; }
-
         public UserException(int statusCode, string message) : base(message)
         {
             StatusCode = statusCode;

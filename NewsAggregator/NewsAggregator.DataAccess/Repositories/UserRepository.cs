@@ -11,12 +11,10 @@ namespace NewsAggregator.DataAccess.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly NewsAggregatorDbContext _dbContext;
-
         public UserRepository(NewsAggregatorDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-
         public IQueryable<User> GetAll()
         {
             return _dbContext.Users;

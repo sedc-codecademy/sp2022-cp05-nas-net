@@ -50,8 +50,8 @@ namespace NewsAggregator.Api.Controllers
         {
             try
             {
-                _rssService.Create(model);
-                return Ok("Rss feed created successfully.");
+                var res = _rssService.Create(model);
+                return Ok(res);
             }
             catch (RSSFeedException rex)
             {

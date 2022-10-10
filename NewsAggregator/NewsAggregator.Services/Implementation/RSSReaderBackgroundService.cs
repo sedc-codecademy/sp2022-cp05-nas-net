@@ -59,7 +59,7 @@ namespace NewsAggregator.Services.Implementation
                             var newArticle = new Article
                             {
                                 Title = value.Title.Text,
-                                Description = value.Summary.Text,
+                                Description = value.Summary?.Text ?? "Open original article to read more...",
                                 ImageUrl = images[index],
                                 OriginalArticleUrl = value.Id,
                                 SourceUrl = feed.Links.First().Uri.ToString(),

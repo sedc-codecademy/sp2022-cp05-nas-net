@@ -12,7 +12,7 @@ using NewsAggregator.DataAccess;
 namespace NewsAggregator.DataAccess.Migrations
 {
     [DbContext(typeof(NewsAggregatorDbContext))]
-    [Migration("20221009164725_init")]
+    [Migration("20221009184015_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -366,7 +366,7 @@ namespace NewsAggregator.DataAccess.Migrations
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Article", b =>
                 {
                     b.HasOne("NewsAggregator.Domain.Entities.Category", "Category")
-                        .WithMany("Articles")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -407,11 +407,6 @@ namespace NewsAggregator.DataAccess.Migrations
             modelBuilder.Entity("NewsAggregator.Domain.Entities.Article", b =>
                 {
                     b.Navigation("ArticleComments");
-                });
-
-            modelBuilder.Entity("NewsAggregator.Domain.Entities.Category", b =>
-                {
-                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

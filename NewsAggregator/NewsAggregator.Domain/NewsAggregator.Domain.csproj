@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NewsAggregator.InterfaceModels\NewsAggregator.InterfaceModels.csproj" />
+    <ProjectReference Include="..\NewsAggregator\NewsAggregator.Helpers.csproj" />
   </ItemGroup>
 
 </Project>

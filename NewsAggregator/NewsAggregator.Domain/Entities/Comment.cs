@@ -1,4 +1,6 @@
-﻿namespace NewsAggregator.Domain.Entities
+﻿using NewsAggregator.Domain.Interfaces;
+
+namespace NewsAggregator.Domain.Entities
 {
     public class Comment : IEntity
     {

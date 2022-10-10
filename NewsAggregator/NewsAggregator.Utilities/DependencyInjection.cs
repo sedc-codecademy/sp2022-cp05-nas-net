@@ -37,6 +37,7 @@ namespace NewsAggregator.Utilities
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IArticleService, ArticleService>();
             services.AddTransient<IRSSFeedService, RSSFeedService>();
+            services.AddTransient<ICategoryService, CategoryService>();
 
             //Background services
             services.AddHostedService<RSSReaderBackgroundService>();

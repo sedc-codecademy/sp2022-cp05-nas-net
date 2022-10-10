@@ -1,4 +1,5 @@
-﻿using NewsAggregator.InterfaceModels.Models.User;
+﻿using NewsAggregator.Domain.Interfaces;
+using NewsAggregator.InterfaceModels.Models.User;
 
 namespace NewsAggregator.Domain.Entities
 {

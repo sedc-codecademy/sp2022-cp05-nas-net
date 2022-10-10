@@ -1,10 +1,5 @@
 ﻿using NewsAggregator.Domain.Entities;
 using NewsAggregator.InterfaceModels.Models.Comment;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewsAggregator.Mappers
 {
@@ -17,7 +12,8 @@ namespace NewsAggregator.Mappers
                 Id = comment.Id,
                 Content = comment.Content,
                 DateCreated = comment.DateCreated,
-                Username = comment.User.Username
+                ArticleId = comment.ArticleId,
+                UserId = comment.UserId
             };
         }
     }

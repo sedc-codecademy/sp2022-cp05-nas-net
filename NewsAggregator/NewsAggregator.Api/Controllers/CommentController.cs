@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NewsAggregator.Configurations;
+using NewsAggregator.Exceptions;
 using NewsAggregator.Services.Abstraction;
+using System.Security.Claims;
 
 namespace NewsAggregator.Api.Controllers
 {
@@ -16,7 +18,7 @@ namespace NewsAggregator.Api.Controllers
         private readonly ICommentService _commentService;
         private readonly AppSettings _appSettings;
 
-        public CommentController(ICommentService commentService ,IOptions<AppSettings> appSettings)
+        public CommentController(ICommentService commentService, IOptions<AppSettings> appSettings)
         {
             _commentService = commentService;
             _appSettings = appSettings.Value;
@@ -27,5 +29,7 @@ namespace NewsAggregator.Api.Controllers
         //UPDATE COMMENT - authenticate and authorize comment owner
 
         //DELETE COMMENT - authenticate and authorize comment owner
+
+
     }
 }

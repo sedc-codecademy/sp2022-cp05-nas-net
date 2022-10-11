@@ -24,70 +24,68 @@ namespace NewsAggregator.Services.Implementation
         }
         public ArticleDetailsDto GetArticle(int id)
         {
-            var article = _articleRepository.GetAll()
-                                            .Include(x => x.ArticleComments)
-                                            .Include(x => x.Category)
-                                            .Where(x => x.Id == id)
-                                            .FirstOrDefault()
-                                            ?? throw new Exception("Article not found"); //TODO change to custom exception
+            var article = _articleRepository.GetById(id);
 
-            var dto = article.ToArticleDetailsDto();
+            if (article == null)
+            {
+                throw new ArticleException(404, id, $"Article with ID:{id} does not exist");
+            }
 
-            dto.Category = article.Category.ToCategoryDto();
-           /* dto.CommentsDto = GetArticleComments(id);*/ //--> INCLUDE FROM ARTICLE REPOSITORY
-            
-            return dto;
+            return article.ToArticleDetailsDto();
         }
-        public List<ArticleDto> GetArticlesHomepage(int pageNum)
+        public ArticlesPaginationDto GetArticles(int pageNum)
         {
             //Numbers of articles shown is based on the initial FE implementation, but can be changed depending on the current FE if needed.
-            const int articlesShown = 5;
+            const int itemsPerPage = 10;
 
-            var articles = _articleRepository.GetAll()
-                                             .OrderByDescending(x => x.Id)
-                                             .Skip(pageNum * articlesShown)
-                                             .Take(articlesShown);
+            var articles = _articleRepository.GetAll();
 
-            var articlesDto = articles.Select(x => x.ToArticleDto());
+            var pagination = articles.Skip((pageNum - 1) * itemsPerPage)
+                                     .Take(itemsPerPage)
+                                     .Select(x => x.ToArticleDto())
+                                     .ToList();
 
-            return articlesDto.ToList();
+            var articlesPagination = new ArticlesPaginationDto(itemsPerPage, pageNum, articles.Count(), pagination);
+
+            return articlesPagination;
         }
 
-        public List<ArticleDto> GetArticlesByCategory(string categoryName, int pageNum)
+        public ArticlesPaginationDto GetArticlesByCategory(int categoryId, int pageNum)
         {
             //Numbers of articles shown is based on the initial FE implementation, but can be changed depending on the current FE if needed.
-            const int articlesShown = 10;
+            const int itemsPerPage = 10;
 
-            var articles = _articleRepository.GetAll()
-                                             .Include(x => x.Category)
-                                             .Where(x => x.Category.Name == categoryName)
-                                             .OrderByDescending(x => x.Id)
-                                             .Skip(pageNum * articlesShown)
-                                             .Take(articlesShown);
+            var articles = _articleRepository.GetByCategory(categoryId);
 
-            var articlesDto = articles.Select(x => x.ToArticleDto());
-
-            return articlesDto.ToList();
+            var pagination = articles.Skip((pageNum - 1) * itemsPerPage)
+                                     .Take(itemsPerPage)
+                                     .Select(x => x.ToArticleDto())
+                                     .ToList();
+            var articlesPagination = new ArticlesPaginationDto(itemsPerPage, pageNum, articles.Count(), pagination);
+            return articlesPagination;
         }
-        public List<ArticleDto> GetArticlesBySearchValue(string searchValue, int pageNum)
+        public ArticlesPaginationDto GetArticlesBySearchValue(string searchValue, int pageNum)
         {
             //Numbers of articles shown is based on the initial FE implementation, but can be changed depending on the current FE if needed.
-            const int articlesShown = 10;
+            const int itemsPerPage = 10;
 
-            var articles = _articleRepository.GetAll()
-                                             .Where(x => x.Title.Contains(searchValue) || x.Description.Contains(searchValue))
-                                             .OrderByDescending(x => x.Id)
-                                             .Skip(pageNum * articlesShown)
-                                             .Take(articlesShown);
+            var articles = _articleRepository.GetBySearchQuery(searchValue);
 
-            var articlesDto = articles.Select(x => x.ToArticleDto());
-
-            return articlesDto.ToList();
+            var pagination = articles.Skip((pageNum - 1) * itemsPerPage)
+                                     .Take(itemsPerPage)
+                                     .Select(x => x.ToArticleDto())
+                                     .ToList();
+            var articlesPagination = new ArticlesPaginationDto(itemsPerPage, pageNum, articles.Count(), pagination);
+            return articlesPagination;
         }
 
         public void DeleteArticle(int id)
         {
-            var article = _articleRepository.GetById(id) ?? throw new Exception("Article not found"); //TODO change to custom exception
+            var article = _articleRepository.GetById(id);
+            if (article == null)
+            {
+                throw new ArticleException(404, id, $"Article with ID :{id} does not exist.");
+            }
 
             _articleRepository.Delete(article);
         }

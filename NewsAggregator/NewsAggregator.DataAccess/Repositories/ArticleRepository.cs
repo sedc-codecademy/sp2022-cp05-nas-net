@@ -19,11 +19,26 @@ namespace NewsAggregator.DataAccess.Repositories
         }
         public IQueryable<Article> GetAll()
         {
-            return _dbContext.Articles;
+            return _dbContext.Articles.Include(x => x.Category)
+                                      .OrderByDescending(x => x.Id);
+        }
+        public IQueryable<Article> GetByCategory(int categoryId)
+        {
+            return _dbContext.Articles.Include(x => x.Category)
+                                      .Where(x => x.Category.Id == categoryId)
+                                      .OrderByDescending(x => x.Id);
+        }
+        public IQueryable<Article> GetBySearchQuery(string searchQuery)
+        {
+            var formatedSearchQuery = searchQuery.Replace('_', ' ');
+            return _dbContext.Articles.Include(x => x.Category)
+                                      .Where(x => x.Title
+                                      .Contains(formatedSearchQuery) || x.Description.Contains(formatedSearchQuery))
+                                      .OrderByDescending(x => x.Id);
         }
         public Article? GetById(int id)
         {
-            return GetAll().FirstOrDefault(x => x.Id == id);
+            return GetAll().Include(x => x.ArticleComments).Include(x => x.Category).FirstOrDefault(x => x.Id == id);
         }
         public void Create(Article entity)
         {
@@ -50,5 +65,7 @@ namespace NewsAggregator.DataAccess.Repositories
             _dbContext.Remove(entity);
             _dbContext.SaveChanges();
         }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using NewsAggregator.DataAccess.Abstraction;
+﻿using Microsoft.EntityFrameworkCore;
+using NewsAggregator.DataAccess.Abstraction;
 using NewsAggregator.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -18,26 +19,53 @@ namespace NewsAggregator.DataAccess.Repositories
         }
         public IQueryable<Article> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Articles.Include(x => x.Category)
+                                      .OrderByDescending(x => x.Id);
         }
-
+        public IQueryable<Article> GetByCategory(int categoryId)
+        {
+            return _dbContext.Articles.Include(x => x.Category)
+                                      .Where(x => x.Category.Id == categoryId)
+                                      .OrderByDescending(x => x.Id);
+        }
+        public IQueryable<Article> GetBySearchQuery(string searchQuery)
+        {
+            var formatedSearchQuery = searchQuery.Replace('_', ' ');
+            return _dbContext.Articles.Include(x => x.Category)
+                                      .Where(x => x.Title
+                                      .Contains(formatedSearchQuery) || x.Description.Contains(formatedSearchQuery))
+                                      .OrderByDescending(x => x.Id);
+        }
         public Article? GetById(int id)
         {
-            throw new NotImplementedException();
+            return GetAll().Include(x => x.ArticleComments).Include(x => x.Category).FirstOrDefault(x => x.Id == id);
         }
         public void Create(Article entity)
         {
             throw new NotImplementedException();
         }
+        public async Task CreateMany(List<Article> entities)
+        {
+            foreach (var entity in entities)
+            {
+                if (_dbContext.Articles.All(x => x.OriginalArticleUrl != entity.OriginalArticleUrl) || _dbContext.Articles.Count() == 0)
+                {
+                    _dbContext.Articles.Add(entity);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+        }
         public void Update(Article entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Update(entity);
+            _dbContext.SaveChanges();
         }
-
         public void Delete(Article entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Remove(entity);
+            _dbContext.SaveChanges();
         }
-    
+
+
     }
 }

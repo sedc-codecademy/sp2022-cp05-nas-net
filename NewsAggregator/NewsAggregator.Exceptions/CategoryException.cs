@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator.Exceptions
 {
-    public class UserException : Exception
+    public class CategoryException : Exception
     {
-        public int? UserId { get; set; }
+        public int? CategoryId { get; set; }
         public int StatusCode { get; set; }
-        public UserException(int statusCode, string message) : base(message)
+        public CategoryException(int statusCode, string message) : base(message)
         {
             StatusCode = statusCode;
         }
-        public UserException(int statusCode, int? userId, string message) : base(message)
+        public CategoryException(int statusCode, int? categoryId, string message) : base(message)
         {
-            UserId = userId;
+            CategoryId = categoryId;
             StatusCode = statusCode;
         }
     }

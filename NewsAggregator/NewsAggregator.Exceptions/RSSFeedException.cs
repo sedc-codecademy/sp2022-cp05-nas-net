@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator.Exceptions
 {
-    public class UserException : Exception
+    public class RSSFeedException : Exception
     {
-        public int? UserId { get; set; }
+        public int? RSSFeedId { get; set; }
         public int StatusCode { get; set; }
-        public UserException(int statusCode, string message) : base(message)
+        public RSSFeedException(int statusCode, string message) : base(message)
         {
             StatusCode = statusCode;
         }
-        public UserException(int statusCode, int? userId, string message) : base(message)
+        public RSSFeedException(int statusCode, int? rssFeedId, string message) : base(message)
         {
-            UserId = userId;
+            RSSFeedId = rssFeedId;
             StatusCode = statusCode;
         }
     }

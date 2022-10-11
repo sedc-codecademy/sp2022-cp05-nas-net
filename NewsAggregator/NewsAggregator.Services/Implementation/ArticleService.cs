@@ -22,35 +22,70 @@ namespace NewsAggregator.Services.Implementation
             _commentsRepository = commentsRepository;
             _userRepository = userRepository;
         }
-        public ArticleDto GetArticle(int id)
+        public ArticleDetailsDto GetArticle(int id)
         {
-            var article = _articleRepository.GetAll()
-                                            .Include(x => x.ArticleComments)
-                                            .Where(x => x.Id == id)
-                                            .FirstOrDefault()
-                                            ?? throw new Exception("Article not found"); //TODO change to custom exception
+            var article = _articleRepository.GetById(id);
 
-            var dto = article.ToArticleDto();
+            if (article == null)
+            {
+                throw new ArticleException(404, id, $"Article with ID:{id} does not exist");
+            }
 
-           /* dto.CommentsDto = GetArticleComments(id);*/ //--> INCLUDE FROM ARTICLE REPOSITORY
-
-            return dto;
+            return article.ToArticleDetailsDto();
         }
-        public List<ArticleDto> GetArticles()
+        public ArticlesPaginationDto GetArticles(int pageNum)
         {
-            var articles = _articleRepository.GetAll()
-                                             .Include(x => x.ArticleComments);
+            //Numbers of articles shown is based on the initial FE implementation, but can be changed depending on the current FE if needed.
+            const int itemsPerPage = 10;
 
-            var articlesDto = articles.Select(x => x.ToArticleDto()).ToList();
-            /*articlesDto.ForEach(x => x.CommentsDto = GetArticleComments(x.Id));*/  //--> INCLUDE FROM ARTICLE REPOSITORY
+            var articles = _articleRepository.GetAll();
 
-            return articlesDto;
+            var pagination = articles.Skip((pageNum - 1) * itemsPerPage)
+                                     .Take(itemsPerPage)
+                                     .Select(x => x.ToArticleDto())
+                                     .ToList();
+
+            var articlesPagination = new ArticlesPaginationDto(itemsPerPage, pageNum, articles.Count(), pagination);
+
+            return articlesPagination;
         }
-      
-      
+
+        public ArticlesPaginationDto GetArticlesByCategory(int categoryId, int pageNum)
+        {
+            //Numbers of articles shown is based on the initial FE implementation, but can be changed depending on the current FE if needed.
+            const int itemsPerPage = 10;
+
+            var articles = _articleRepository.GetByCategory(categoryId);
+
+            var pagination = articles.Skip((pageNum - 1) * itemsPerPage)
+                                     .Take(itemsPerPage)
+                                     .Select(x => x.ToArticleDto())
+                                     .ToList();
+            var articlesPagination = new ArticlesPaginationDto(itemsPerPage, pageNum, articles.Count(), pagination);
+            return articlesPagination;
+        }
+        public ArticlesPaginationDto GetArticlesBySearchValue(string searchValue, int pageNum)
+        {
+            //Numbers of articles shown is based on the initial FE implementation, but can be changed depending on the current FE if needed.
+            const int itemsPerPage = 10;
+
+            var articles = _articleRepository.GetBySearchQuery(searchValue);
+
+            var pagination = articles.Skip((pageNum - 1) * itemsPerPage)
+                                     .Take(itemsPerPage)
+                                     .Select(x => x.ToArticleDto())
+                                     .ToList();
+            var articlesPagination = new ArticlesPaginationDto(itemsPerPage, pageNum, articles.Count(), pagination);
+            return articlesPagination;
+        }
+
         public void DeleteArticle(int id)
         {
-            var article = _articleRepository.GetById(id) ?? throw new Exception("Article not found"); //TODO change to custom exception
+            var article = _articleRepository.GetById(id);
+            if (article == null)
+            {
+                throw new ArticleException(404, id, $"Article with ID :{id} does not exist.");
+            }
 
             _articleRepository.Delete(article);
         }

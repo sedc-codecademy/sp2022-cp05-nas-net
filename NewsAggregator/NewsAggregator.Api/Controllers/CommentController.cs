@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NewsAggregator.Configurations;
-using NewsAggregator.InterfaceModels.Models.Comment;
 using NewsAggregator.Services.Abstraction;
 using System.Security.Claims;
 
@@ -58,20 +57,5 @@ namespace NewsAggregator.Api.Controllers
         }
 
         //DELETE COMMENT - authenticate and authorize comment owner
-        [HttpDelete("Delete/{id:int}")]
-        public IActionResult Delete([FromRoute] int commentId)
-        {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            try
-            {
-                _commentService.Delete(commentId, userId);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                return BadRequest("Can not update comment.");
-            }
-        }
     }
 }

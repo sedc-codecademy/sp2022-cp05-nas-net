@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator.DataAccess.Abstraction
 {
-
-    public interface IAdRepository : IRepository<Ad>
+    public interface IRSSFeedRepository :IRepository<RSSFeed>
     {
+        IQueryable<RSSFeed> GetActiveFeeds();
     }
 }

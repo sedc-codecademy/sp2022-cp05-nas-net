@@ -8,38 +8,36 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator.DataAccess.Repositories
 {
-    public class AdRepository : IAdRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly NewsAggregatorDbContext _dbContext;
-        public AdRepository(NewsAggregatorDbContext dbContext)
+
+        public CategoryRepository(NewsAggregatorDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-
-        public IQueryable<Ad> GetAll()
+        public IQueryable<Category> GetAll()
         {
-            return _dbContext.Ads;
+            return _dbContext.Categories;
         }
-        public Ad? GetById(int id)
+        public Category? GetById(int id)
         {
-            return _dbContext.Ads.SingleOrDefault(x => x.Id == id);
+            return _dbContext.Categories.SingleOrDefault(x => x.Id == id);
         }
-        public void Create(Ad entity)
+        public void Create(Category entity)
         {
-            _dbContext.Ads.Add(entity);
+            _dbContext.Categories.Add(entity);
             _dbContext.SaveChanges();
         }
-        public void Update(Ad entity)
+        public void Update(Category entity)
         {
             _dbContext.Update(entity);
             _dbContext.SaveChanges();
         }
-        public void Delete(Ad entity)
+        public void Delete(Category entity)
         {
-            _dbContext.Ads.Remove(entity);
+            _dbContext.Remove(entity);
             _dbContext.SaveChanges();
         }
-
-        
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace NewsAggregator.Domain.Entities
+﻿namespace NewsAggregator.Domain.Interfaces
 {
     public interface IEntity
     {

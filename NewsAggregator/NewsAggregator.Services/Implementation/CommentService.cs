@@ -19,7 +19,7 @@ namespace NewsAggregator.Services.Implementation
             {
                 throw new Exception("Text field is required!");
             }
-            var newComment = new Comment(comment.Content, comment.DateCreated, comment.ArticleId, comment.UserId);
+            var newComment = new Comment(comment.Content, comment.ArticleId, comment.UserId);
             _commentRepository.Create(newComment);
         }
         public void Update(CommentDto comment, int commentId)

@@ -6,16 +6,16 @@ namespace NewsAggregator.Domain.Entities
     {
         public int Id { get; set; }
         public string Content { get; set; } = string.Empty;
-        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime DateCreated { get; set; }
         public Article? Article { get; set; }
         public int ArticleId { get; set; }
         public User? User { get; set; }
         public int UserId { get; set; }
         public Comment() { }
-        public Comment(string content, DateTime datecreated, int articleId, int userId)
+        public Comment(string content, int articleId, int userId)
         {
             Content = content;
-            DateCreated = datecreated;
+            DateCreated = DateTime.Now;
             ArticleId = articleId;
             UserId = userId;
         }

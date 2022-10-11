@@ -41,7 +41,7 @@ namespace NewsAggregator.Domain.Entities
                 throw new Exception("Article not found");
             }
 
-            Comment addComment = new(comment, article, article.Id, this, Id);
+            Comment addComment = new(comment, article.Id, Id, article, this);
 
             return addComment;
         }

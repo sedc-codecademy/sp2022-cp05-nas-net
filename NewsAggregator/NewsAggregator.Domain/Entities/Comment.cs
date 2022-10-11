@@ -12,12 +12,14 @@ namespace NewsAggregator.Domain.Entities
         public User? User { get; set; }
         public int UserId { get; set; }
         public Comment() { }
-        public Comment(string content, int articleId, int userId)
+        public Comment(string content, int articleId, int userId, Article article, User user)
         {
             Content = content;
             DateCreated = DateTime.Now;
             ArticleId = articleId;
             UserId = userId;
+            User = user;
+            Article = article;
         }
         public void Update(CommentDto model)
         {

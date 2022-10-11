@@ -1,4 +1,5 @@
-﻿using NewsAggregator.InterfaceModels.Models.Comment;
+﻿using NewsAggregator.Domain.Interfaces;
+using NewsAggregator.InterfaceModels.Models.Comment;
 
 namespace NewsAggregator.Domain.Entities
 {

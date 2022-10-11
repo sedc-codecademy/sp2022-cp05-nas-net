@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NewsAggregator.Configurations;
+using NewsAggregator.InterfaceModels.Models.Comment;
 using NewsAggregator.Services.Abstraction;
 using System.Security.Claims;
 

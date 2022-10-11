@@ -21,6 +21,10 @@ namespace NewsAggregator.DataAccess.Repositories
         {
             return _dbContext.RssFeeds.Include(x => x.Category);
         }
+        public IQueryable<RSSFeed> GetActiveFeeds()
+        {
+            return _dbContext.RssFeeds.Include(x => x.Category).Where(x => x.IsActive);
+        }
         public RSSFeed? GetById(int id)
         {
             return _dbContext.RssFeeds.Include(x => x.Category).SingleOrDefault(r => r.Id == id);
@@ -40,5 +44,7 @@ namespace NewsAggregator.DataAccess.Repositories
             _dbContext.Remove(entity);
             _dbContext.SaveChanges();
         }
+
+       
     }
 }

@@ -43,7 +43,7 @@ namespace NewsAggregator.Services.Implementation
                     var rssRepository = scope.ServiceProvider.GetRequiredService<IRSSFeedRepository>();
                     var articleRepository = scope.ServiceProvider.GetRequiredService<IArticleRepository>();
                     var newArticles = new List<Article>();
-                    var rssFeeds = rssRepository.GetAll();
+                    var rssFeeds = rssRepository.GetActiveFeeds();
                     foreach (var rssFeed in rssFeeds)
                     {
                         var settings = new XmlReaderSettings();

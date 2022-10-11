@@ -9,5 +9,6 @@ namespace NewsAggregator.DataAccess.Abstraction
 {
     public interface IRSSFeedRepository :IRepository<RSSFeed>
     {
+        IQueryable<RSSFeed> GetActiveFeeds();
     }
 }

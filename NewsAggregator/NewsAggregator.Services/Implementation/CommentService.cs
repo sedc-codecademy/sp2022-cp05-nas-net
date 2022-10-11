@@ -31,15 +31,28 @@ namespace NewsAggregator.Services.Implementation
             var newComment = user.AddComment(comment.Content, article);
             _commentRepository.Create(newComment);
         }
-        public void Update(CommentDto comment, int commentId)
+        public void Update(CommentDto comment, int commentId, int userId)
         {
+            var user = _userRepository.GetById(userId) ?? throw new UserException(404, "User not found");
             var entity = _commentRepository.GetById(commentId) ?? throw new Exception("Comment not found!");
+
+            if (user.Id != comment.UserId)
+            {
+                throw new Exception("You are not authorized to update this comment!");
+            }
             entity.Update(comment);
             _commentRepository.Update(entity);
         }
-        public void Delete(int id)
+        public void Delete(int id, int userId)
         {
+
+            var user = _userRepository.GetById(userId) ?? throw new UserException(404, "User not found");
             var comment = _commentRepository.GetById(id) ?? throw new Exception("Comment not found!");
+
+            if (user.Id != comment.UserId)
+            {
+                throw new Exception("You are not authorized to update this comment!");
+            }
 
             _commentRepository.Delete(comment);
         }

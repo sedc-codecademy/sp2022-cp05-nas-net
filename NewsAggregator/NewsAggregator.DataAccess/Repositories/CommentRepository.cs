@@ -14,7 +14,6 @@ namespace NewsAggregator.DataAccess.Repositories
         {
             return _dbContext.Comments;
         }
-
         public Comment? GetById(int id)
         {
             return _dbContext.Comments.SingleOrDefault(c => c.Id == id);
@@ -29,7 +28,6 @@ namespace NewsAggregator.DataAccess.Repositories
             _dbContext.Update(entity);
             _dbContext.SaveChanges();
         }
-
         public void Delete(Comment entity)
         {
             _dbContext.Comments.Remove(entity);

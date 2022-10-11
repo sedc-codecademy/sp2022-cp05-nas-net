@@ -5,8 +5,10 @@ namespace NewsAggregator.Services.Abstraction
 {
     public interface IArticleService
     {
-        List<ArticleDto> GetArticles();
-        ArticleDto GetArticle(int id);
+        ArticlesPaginationDto GetArticles(int pageNum);
+        ArticlesPaginationDto GetArticlesByCategory(int categoryId, int pageNum);
+        ArticlesPaginationDto GetArticlesBySearchValue(string searchValue, int pageNum);
+        ArticleDetailsDto GetArticle(int id);
         void DeleteArticle(int id);
     }
 }

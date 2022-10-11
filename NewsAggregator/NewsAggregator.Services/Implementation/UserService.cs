@@ -22,16 +22,13 @@ namespace NewsAggregator.Services.Implementation
 {
     public class UserService : IUserService
     {
-
         private readonly IUserRepository _userRepository;
         private readonly AppSettings _appSettings;
-
         public UserService(IUserRepository userRepository, IOptions<AppSettings> appSettings)
         {
             _userRepository = userRepository;
             _appSettings = appSettings.Value;
         }
-
         public AuthUserDto Authenticate(string loginProvider, string password)
         {
             var hashedPassword = PasswordHasher.HashPassword(password);
@@ -70,7 +67,6 @@ namespace NewsAggregator.Services.Implementation
                 Token = tokenHandler.WriteToken(token)
             };
         }
-
         public void Register(RegisterUserDto model)
         {
             ValidateUserDetails(model.FirstName, model.LastName, model.Username, model.Email);
@@ -78,7 +74,6 @@ namespace NewsAggregator.Services.Implementation
             var user = new User(model.FirstName, model.LastName, model.Username, model.Email, PasswordHasher.HashPassword(model.Password));
             _userRepository.Create(user);
         }
-
         public void RegisterAdmin(RegisterUserDto model)
         {
             ValidateUserDetails(model.FirstName, model.LastName, model.Username, model.Email);
@@ -87,7 +82,6 @@ namespace NewsAggregator.Services.Implementation
             _userRepository.Create(user);
 
         }
-
         public void ChangePassword(ChangePasswordDto model, int userId)
         {
             var user = _userRepository.GetById(userId);
@@ -119,7 +113,6 @@ namespace NewsAggregator.Services.Implementation
             _userRepository.Update(user);
 
         }
-
         public void Delete(int id)
         {
             var user = _userRepository.GetById(id);
@@ -131,14 +124,10 @@ namespace NewsAggregator.Services.Implementation
             List<int> nums = new List<int> { 1, 2, 3, 4 };
             
         }
-
-
-
         public List<UserDto> GetAll()
         {
             return _userRepository.GetAll().Select(x => x.ToUserDto()).ToList();
         }
-
         public UserDto GetById(int id)
         {
             var user = _userRepository.GetById(id);
@@ -149,8 +138,6 @@ namespace NewsAggregator.Services.Implementation
             }
             return user.ToUserDto();
         }
-
-
         private bool IsUsernameUsed(string username)
         {
             return _userRepository.GetAll().Any(x => x.Username == username);
@@ -172,14 +159,12 @@ namespace NewsAggregator.Services.Implementation
         {
             return _userRepository.GetAll().Any(x => x.Email == email);
         }
-
         private bool IsPasswordValid(string password)
         {
             var passwordRegex = new Regex("^(?=.*[0-9])(?=.*[a-z]).{6,20}$");
             var match = passwordRegex.Match(password);
             return match.Success;
         }
-
         private void ValidateUserPassword(string password, string confirmPassword)
         {
             if (string.IsNullOrEmpty(password))
@@ -195,7 +180,6 @@ namespace NewsAggregator.Services.Implementation
                 throw new UserException(400, "Please enter a valid password format");
             }
         }
-
         private void ValidateUserDetails(string firstName, string lastName, string username, string email, int userId = 0)
         {
             var users = _userRepository.GetAll();
@@ -232,7 +216,5 @@ namespace NewsAggregator.Services.Implementation
                 throw new UserException(400, "Email is already used.");
             }
         }
-
-
     }
 }

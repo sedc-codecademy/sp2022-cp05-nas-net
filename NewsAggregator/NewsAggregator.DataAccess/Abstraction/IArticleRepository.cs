@@ -9,5 +9,8 @@ namespace NewsAggregator.DataAccess.Abstraction
 {
     public interface IArticleRepository : IRepository<Article>
     {
+        public IQueryable<Article> GetByCategory(int categoryId);
+        public IQueryable<Article> GetBySearchQuery(string searchQuery);
+        Task CreateMany(List<Article> entities);
     }
 }

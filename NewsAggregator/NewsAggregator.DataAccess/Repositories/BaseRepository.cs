@@ -1,5 +1,5 @@
 ﻿using NewsAggregator.DataAccess.Abstraction;
-using NewsAggregator.Domain.Entities;
+using NewsAggregator.Domain.Interfaces;
 
 namespace NewsAggregator.DataAccess.Repositories
 {

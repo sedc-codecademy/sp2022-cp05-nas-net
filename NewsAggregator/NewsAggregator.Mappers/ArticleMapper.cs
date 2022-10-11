@@ -13,10 +13,23 @@ namespace NewsAggregator.Mappers
                 Title = article.Title,
                 Description = article.Description,
                 ImageUrl = article.ImageUrl,
+                Category = article.Category.ToCategoryDto()
+            };
+        }
+
+        public static ArticleDetailsDto ToArticleDetailsDto(this Article article)
+        {
+            return new()
+            {
+                Id = article.Id,
+                Title = article.Title,
+                Description = article.Description,
+                ImageUrl = article.ImageUrl,
                 OriginalArticleUrl = article.OriginalArticleUrl,
                 SourceUrl = article.SourceUrl,
                 SourceLogo = article.SourceLogo,
-                DatePublished = article.DatePublished
+                DatePublished = article.DatePublished,
+                Category = article.Category.ToCategoryDto()
             };
         }
     }

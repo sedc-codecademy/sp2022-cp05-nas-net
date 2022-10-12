@@ -13,14 +13,11 @@ namespace NewsAggregator.Services.Implementation
     public class ArticleService : IArticleService
     {
         private readonly IArticleRepository _articleRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly ICommentRepository _commentsRepository;
 
-        public ArticleService(IArticleRepository repository, ICommentRepository commentsRepository, IUserRepository userRepository)
+        public ArticleService(IArticleRepository repository)
         {
             _articleRepository = repository;
-            _commentsRepository = commentsRepository;
-            _userRepository = userRepository;
+
         }
         public ArticleDetailsDto GetArticle(int id)
         {

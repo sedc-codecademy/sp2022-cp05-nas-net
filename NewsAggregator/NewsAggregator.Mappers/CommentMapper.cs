@@ -13,7 +13,7 @@ namespace NewsAggregator.Mappers
                 Content = comment.Content,
                 DateCreated = comment.DateCreated,
                 ArticleId = comment.ArticleId,
-                UserId = comment.UserId
+                User = comment.User.ToCommentOwnerDto(),
             };
         }
     }

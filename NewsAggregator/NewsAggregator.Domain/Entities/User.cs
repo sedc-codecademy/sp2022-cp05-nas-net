@@ -34,13 +34,11 @@ namespace NewsAggregator.Domain.Entities
         }
         public Comment AddComment(string comment, Article article)
         {
-            if(article == null)
+            if (article == null)
             {
                 throw new Exception("Article not found");
             }
-
-            Comment addComment = new(comment, article.Id, Id, article, this);
-
+            Comment addComment = new(comment, article.Id, Id);
             return addComment;
         }
     }

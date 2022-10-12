@@ -22,5 +22,14 @@ namespace NewsAggregator.Mappers
                 IsAdmin = model.IsAdmin
             };
         }
+
+        public static CommentOwnerDto ToCommentOwnerDto(this User model)
+        {
+            return new CommentOwnerDto
+            {
+                Id = model.Id,
+                Username = model.Username
+            };
+        }
     }
 }

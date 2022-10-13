@@ -9,7 +9,7 @@ namespace NewsAggregator.InterfaceModels.Models.Article
         public string SourceUrl { get; set; } = string.Empty;
         public string SourceLogo { get; set; } = string.Empty;
         public DateTime DatePublished { get; set; }
-        public IEnumerable<CommentDto> CommentsDto { get; set; } = new List<CommentDto>();
+        public List<CommentDto> Comments { get; set; } = new List<CommentDto>();
         public CategoryDto? Category { get; set; }
     }
 }

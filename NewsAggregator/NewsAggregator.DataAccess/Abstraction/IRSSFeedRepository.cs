@@ -1,4 +1,4 @@
-﻿using NewsAggregator.Domain.Entities;
+using NewsAggregator.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -12,6 +12,7 @@ namespace NewsAggregator.Domain.Entities
     {
         public int Id { get; set ; }
         public string ImageUrl { get; set; }
+       /* public string BannerImageUrl { get; set; }*/ // <--- FALI OVA
         public string RedirectUrl { get; set; }
         public string AltText { get; set; }
         public bool IsAdActive { get; set; }

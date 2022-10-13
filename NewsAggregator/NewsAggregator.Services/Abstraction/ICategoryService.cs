@@ -1,4 +1,4 @@
-﻿using NewsAggregator.InterfaceModels.Models.Category;
+using NewsAggregator.InterfaceModels.Models.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;

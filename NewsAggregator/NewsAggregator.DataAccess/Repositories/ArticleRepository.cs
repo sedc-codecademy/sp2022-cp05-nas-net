@@ -38,7 +38,10 @@ namespace NewsAggregator.DataAccess.Repositories
         }
         public Article? GetById(int id)
         {
-            return GetAll().Include(x => x.ArticleComments).Include(x => x.Category).FirstOrDefault(x => x.Id == id);
+            return GetAll().Include(x => x.ArticleComments)
+                           .ThenInclude(y => y.User)
+                           .Include(x => x.Category)
+                           .FirstOrDefault(x => x.Id == id);
         }
         public void Create(Article entity)
         {

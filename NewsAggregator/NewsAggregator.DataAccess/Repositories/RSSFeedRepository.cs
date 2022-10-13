@@ -1,4 +1,3 @@
-﻿
 using Microsoft.EntityFrameworkCore;
 using NewsAggregator.DataAccess.Abstraction;
 using NewsAggregator.Domain.Entities;

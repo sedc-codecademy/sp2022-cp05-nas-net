@@ -1,34 +1,37 @@
 ﻿using NewsAggregator.DataAccess.Abstraction;
 using NewsAggregator.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewsAggregator.DataAccess.Repositories
 {
     public class CommentRepository : ICommentRepository
     {
+        private readonly NewsAggregatorDbContext _dbContext;
+        public CommentRepository(NewsAggregatorDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public IQueryable<Comment> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Comments;
         }
         public Comment? GetById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Comments.SingleOrDefault(c => c.Id == id);
         }
         public void Create(Comment entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Add(entity);
+            _dbContext.SaveChanges();
         }
         public void Update(Comment entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Update(entity);
+            _dbContext.SaveChanges();
         }
         public void Delete(Comment entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Comments.Remove(entity);
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using NewsAggregator.Domain.Entities;
+using NewsAggregator.Domain.Entities;
 using NewsAggregator.InterfaceModels.Models.Category;
 using NewsAggregator.InterfaceModels.Models.Comment;
 using System;

@@ -1,4 +1,4 @@
-﻿using NewsAggregator.InterfaceModels.Models.RSSFeed;
+using NewsAggregator.InterfaceModels.Models.RSSFeed;
 using System;
 using System.Collections.Generic;
 using System.Linq;

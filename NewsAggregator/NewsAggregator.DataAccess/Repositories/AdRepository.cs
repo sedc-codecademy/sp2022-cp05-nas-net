@@ -15,10 +15,13 @@ namespace NewsAggregator.DataAccess.Repositories
         {
             _dbContext = dbContext;
         }
-
         public IQueryable<Ad> GetAll()
         {
             return _dbContext.Ads;
+        }
+        public IQueryable<Ad> GetActiveAds()
+        {
+            return _dbContext.Ads.Where(x => x.IsAdActive);
         }
         public Ad? GetById(int id)
         {
@@ -39,7 +42,5 @@ namespace NewsAggregator.DataAccess.Repositories
             _dbContext.Ads.Remove(entity);
             _dbContext.SaveChanges();
         }
-
-        
     }
 }

@@ -90,7 +90,6 @@ namespace NewsAggregator.Services.Implementation
             {
                 throw new RSSFeedException(401, "Rss feed url cannot be empty.");
             }
-
             if (!Uri.IsWellFormedUriString(feedUrl, UriKind.Absolute))
             {
                 throw new RSSFeedException(401, "Invaid Rss feed url format.");
@@ -105,6 +104,6 @@ namespace NewsAggregator.Services.Implementation
             }
         }
 
-        
+
     }
 }

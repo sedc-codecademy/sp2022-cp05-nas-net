@@ -157,13 +157,5 @@ namespace NewsAggregator.Api.Controllers
                 return StatusCode(500, _appSettings.DefaultErrorMessage);
             }
         }
-        private int GetAuthorizedId()
-        {
-            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId))
-            {
-                throw new UserException(userId, "Name identifier claim does not exist!");
-            }
-            return userId;
-        }
     }
 }

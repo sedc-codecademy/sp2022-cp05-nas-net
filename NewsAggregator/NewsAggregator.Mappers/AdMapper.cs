@@ -12,12 +12,13 @@ namespace NewsAggregator.Mappers
     {
         public static AdDto ToAdDto(this Ad ad)
         {
-            return new()
+            return new AdDto()
             {
                 Id = ad.Id,
+                AdName = ad.AdName,
                 ImageUrl = ad.ImageUrl,
+                BannerImageUrl = ad.BannerImageUrl,
                 RedirectUrl = ad.RedirectUrl,
-                AltText = ad.AltText,
                 IsAdActive = ad.IsAdActive
             };
         }

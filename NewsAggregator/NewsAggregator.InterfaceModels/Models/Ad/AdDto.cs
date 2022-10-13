@@ -9,12 +9,10 @@ namespace NewsAggregator.InterfaceModels.Models.Ad
     public class AdDto
     {
         public int Id { get; set; }
+        public string AdName { get; set; }
         public string ImageUrl { get; set; }
-        /*public string BannerImageUrl { get; set; }*/ // <-- FALI OVA
+        public string BannerImageUrl { get; set; }
         public string RedirectUrl { get; set; }
-        public string AltText { get; set; }
         public bool IsAdActive { get; set; }
-
-        public int UserId { get; set; }
     }
 }

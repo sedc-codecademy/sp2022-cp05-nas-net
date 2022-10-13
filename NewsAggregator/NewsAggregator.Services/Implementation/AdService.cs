@@ -24,37 +24,93 @@ namespace NewsAggregator.Services.Implementation
 
         public List<AdDto> GetAllAds()
         {
-            return _adRepository.GetAll().Select(a => AdMapper.ToAdDto(a)).ToList();
+            return _adRepository.GetAll().Select(a => a.ToAdDto()).ToList();
+        }
+
+        public List<AdDto> GetActiveAds()
+        {
+            return _adRepository.GetActiveAds().Select(x => x.ToAdDto()).ToList();
         }
         public AdDto GetAd(int id)
         {
-            var ad = _adRepository.GetAll().Where(x => x.Id == id)
-                                   .FirstOrDefault()
-                                   ?? throw new Exception("Ad not found");
+            var ad = _adRepository.GetById(id);
+            if (ad == null)
+            {
+                throw new AdException(404, id, $"Ad with ID : {id} does not exist.");
+            }
             return ad.ToAdDto();
         }
 
-        public void CreateAd(AdDto model)
+        public int CreateAd(CreateAdDto model)
         {
-            //To do
-            throw new Exception("Not implemented");
+            ValidateModel(model.AdName, model.ImageUrl, model.BannerImageUrl, model.RedirectUrl);
+            var newAd = new Ad(model.AdName, model.ImageUrl, model.BannerImageUrl, model.RedirectUrl);
+            _adRepository.Create(newAd);
+            return newAd.Id;
         }
 
         public void DeleteAd(int id)
         {
-            var ad = _adRepository.GetById(id) ?? throw new Exception("Ad not found"); 
-
+            var ad = _adRepository.GetById(id);
+            if (ad == null)
+            {
+                throw new AdException(404, id, $"Ad with ID : {id} does not exist.");
+            }
             _adRepository.Delete(ad);
         }
-        public void UpdateAd(AdDto model, int adId)
+        public void UpdateAd(UpdateAdDto model, int adId)
         {
             var ad = _adRepository.GetById(adId);
             if (ad == null)
             {
-                throw new UserException(404, adId, "The ad does not exist");
+                throw new AdException(404, adId, $"Ad with ID : {adId} does not exist.");
             }
+            ValidateModel(model.AdName, model.ImageUrl, model.BannerImageUrl, model.RedirectUrl);
             ad.Update(model);
             _adRepository.Update(ad);
+        }
+        public bool Toggle(int adId)
+        {
+            var ad = _adRepository.GetById(adId);
+            if (ad == null)
+            {
+                throw new AdException(404, adId, $"Ad with ID : {adId} does not exist.");
+            }
+            ad.ToggleIsActive();
+            _adRepository.Update(ad);
+            return ad.IsAdActive;
+        }
+
+        private void ValidateModel(string adName, string imageUrl, string bannerImageUrl, string redirectUrl)
+        {
+            if (string.IsNullOrEmpty(adName))
+            {
+                throw new AdException(400, "Ad name cannot be empty.");
+            }
+            if (string.IsNullOrEmpty(imageUrl))
+            {
+                throw new AdException(400, "Image url cannot be empty.");
+            }
+            if (!Uri.IsWellFormedUriString(imageUrl, UriKind.Absolute))
+            {
+                throw new AdException(400, "Please enter a valid image url.");
+            }
+            if (string.IsNullOrEmpty(bannerImageUrl))
+            {
+                throw new AdException(400, "Banner image url cannot be empty.");
+            }
+            if (!Uri.IsWellFormedUriString(bannerImageUrl, UriKind.Absolute))
+            {
+                throw new AdException(400, "Please enter a valid banner image url.");
+            }
+            if (string.IsNullOrEmpty(redirectUrl))
+            {
+                throw new AdException(400, "Redirect url cannot be empty.");
+            }
+            if (!Uri.IsWellFormedUriString(redirectUrl, UriKind.Absolute))
+            {
+                throw new AdException(400, "Please enter a valid redirect url.");
+            }
         }
     }
 }

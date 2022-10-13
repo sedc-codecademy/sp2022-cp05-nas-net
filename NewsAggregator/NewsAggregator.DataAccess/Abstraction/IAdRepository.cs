@@ -10,5 +10,6 @@ namespace NewsAggregator.DataAccess.Abstraction
 
     public interface IAdRepository : IRepository<Ad>
     {
+        IQueryable<Ad> GetActiveAds();
     }
 }

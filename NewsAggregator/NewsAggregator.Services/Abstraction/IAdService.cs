@@ -10,9 +10,11 @@ namespace NewsAggregator.Services.Abstraction
     public interface IAdService
     {
         List<AdDto> GetAllAds();
+        List<AdDto> GetActiveAds();
         AdDto GetAd(int id);
-        void CreateAd(AdDto ad);
-        void UpdateAd(AdDto ad, int id);
+        int CreateAd(CreateAdDto ad);
+        void UpdateAd(UpdateAdDto ad, int id);
+        bool Toggle(int adId);
         void DeleteAd(int id);
     }
 }

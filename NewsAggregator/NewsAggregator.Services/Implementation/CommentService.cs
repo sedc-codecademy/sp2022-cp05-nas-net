@@ -2,6 +2,7 @@
 using NewsAggregator.Domain.Entities;
 using NewsAggregator.Exceptions;
 using NewsAggregator.InterfaceModels.Models.Comment;
+using NewsAggregator.Mappers;
 using NewsAggregator.Services.Abstraction;
 
 namespace NewsAggregator.Services.Implementation
@@ -18,29 +19,52 @@ namespace NewsAggregator.Services.Implementation
             _userRepository = userRepository;
             _articleRepository = articleRepository;
         }
-        public void Create(CommentDto comment, int userId, int articleId)
+        public CommentDto GetById(int commentId)
         {
-            var user = _userRepository.GetById(userId) ?? throw new UserException(404, "User not found");
+            var res = _commentRepository.GetById(commentId);
+            if (res == null)
+            {
+                throw new CommentException(404, commentId, $"Comment with ID : {commentId} does not exist");
+            }
+            return res.ToCommentDto();
+        }
+        public int Create(CreateCommentDto comment, int userId)
+        {
 
-            var article = _articleRepository.GetById(articleId) ?? throw new Exception("Article not found");
-
+            var article = _articleRepository.GetById(comment.ArticleId);
+            if (article == null)
+            {
+                throw new ArticleException(404, comment.ArticleId, $"Article with ID:{comment.ArticleId} does not exist.");
+            }
             if (string.IsNullOrEmpty(comment.Content))
             {
-                throw new Exception("Text field is required!");
+                throw new CommentException(400, "Content field cannot be empty.");
             }
-            var newComment = user.AddComment(comment.Content, article);
+            var newComment = new Comment(comment.Content, comment.ArticleId, userId);
             _commentRepository.Create(newComment);
+            return newComment.Id;
         }
-        public void Update(CommentDto comment, int commentId)
+        public void Update(UpdateCommentDto comment, int commentId, int userId)
         {
-            var entity = _commentRepository.GetById(commentId) ?? throw new Exception("Comment not found!");
+            var entity = _commentRepository.GetById(commentId);
+            if (entity == null)
+            {
+                throw new CommentException(404, commentId, $"Comment with ID : {commentId} does not exist");
+            }
+            if (entity.User.Id != userId)
+            {
+                throw new UserException(401, "You are not authorized to perform this action.");
+            }
+            if (string.IsNullOrEmpty(comment.Content))
+            {
+                throw new CommentException(400, "Content field cannot be empty.");
+            }
             entity.Update(comment);
             _commentRepository.Update(entity);
         }
         public void Delete(int id)
         {
-            var comment = _commentRepository.GetById(id) ?? throw new Exception("Comment not found!");
-
+            var comment = _commentRepository.GetById(id) ?? throw new CommentException(404 , id , $"Comment with ID:{id} does not exist.");
             _commentRepository.Delete(comment);
         }
     }

@@ -1,4 +1,5 @@
-﻿using NewsAggregator.DataAccess.Abstraction;
+﻿using Microsoft.EntityFrameworkCore;
+using NewsAggregator.DataAccess.Abstraction;
 using NewsAggregator.Domain.Entities;
 
 namespace NewsAggregator.DataAccess.Repositories
@@ -16,7 +17,7 @@ namespace NewsAggregator.DataAccess.Repositories
         }
         public Comment? GetById(int id)
         {
-            return _dbContext.Comments.SingleOrDefault(c => c.Id == id);
+            return _dbContext.Comments.Include(x => x.User).SingleOrDefault(c => c.Id == id);
         }
         public void Create(Comment entity)
         {

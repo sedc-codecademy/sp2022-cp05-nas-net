@@ -10,8 +10,8 @@ namespace NewsAggregator.Domain.Entities
         public DateTime DateCreated { get; set; }
         public int ArticleId { get; set; }
         public Article? Article { get; set; }
-        public User? User { get; set; }
         public int UserId { get; set; }
+        public User? User { get; set; }
         public Comment() { }
         public Comment(string content, int articleId, int userId)
         {
@@ -20,11 +20,9 @@ namespace NewsAggregator.Domain.Entities
             ArticleId = articleId;
             UserId = userId;
         }
-        public void Update(CommentDto model)
+        public void Update(UpdateCommentDto model)
         {
             Content = model.Content;
-            DateCreated = model.DateCreated;
-            ArticleId = model.ArticleId;
         }
     }
 }

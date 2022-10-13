@@ -26,6 +26,7 @@ namespace NewsAggregator.Mappers
                 Description = article.Description,
                 ImageUrl = article.ImageUrl,
                 OriginalArticleUrl = article.OriginalArticleUrl,
+                Comments = article.ArticleComments.Select(x => x.ToCommentDto()).ToList(),
                 SourceUrl = article.SourceUrl,
                 SourceLogo = article.SourceLogo,
                 DatePublished = article.DatePublished,

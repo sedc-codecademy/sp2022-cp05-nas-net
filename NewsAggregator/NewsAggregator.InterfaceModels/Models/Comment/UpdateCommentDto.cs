@@ -8,5 +8,6 @@ namespace NewsAggregator.InterfaceModels.Models.Comment
 {
     public class UpdateCommentDto
     {
+        public string Content { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using NewsAggregator.DataAccess;
 namespace NewsAggregator.DataAccess.Migrations
 {
     [DbContext(typeof(NewsAggregatorDbContext))]
-    [Migration("20221013135652_init")]
+    [Migration("20221013214044_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +109,87 @@ namespace NewsAggregator.DataAccess.Migrations
                             ImageUrl = "https://cdn.dribbble.com/users/5349551/screenshots/12021171/media/99c46cd52abd90cf754f5d0bba81f08b.png?compress=1&resize=400x300",
                             IsAdActive = true,
                             RedirectUrl = "https://rog.asus.com/my/laptops/rog-strix/rog-strix-scar-17-2022-series/"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AdName = "Plural Sight",
+                            BannerImageUrl = "https://www.sec.gov/Archives/edgar/data/1725579/000162828019002420/pluralsightlogob01.jpg",
+                            ImageUrl = "https://hmgstrategy1.blob.core.windows.net/hmgfiles/images/default-source/default-album/29482-17_pluralsightad_bl_vf48e7ddc52aed6fb2b0cbff05006a1c82.jpg?sfvrsn=9d0ab2f5_0",
+                            IsAdActive = true,
+                            RedirectUrl = "https://www.pluralsight.com"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AdName = "Seavus Education and Development Center",
+                            BannerImageUrl = "https://www.cpdstandards.com/wp-content/uploads/2021/08/SEDC-Logo.png",
+                            ImageUrl = "https://masit.org.mk/wp-content/uploads/2019/12/sedc.jpg",
+                            IsAdActive = true,
+                            RedirectUrl = "https://www.sedc.mk/"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AdName = "Spotify",
+                            BannerImageUrl = "https://www.techadvisor.com/wp-content/uploads/2022/06/best-spotify-tips-and-tricks-banner.png",
+                            ImageUrl = "https://static-prod.adweek.com/wp-content/uploads/2022/01/spotify-podcast-ads-cta-2022-652x342.jpg",
+                            IsAdActive = true,
+                            RedirectUrl = "https://open.spotify.com/"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AdName = "IPhone 14 Pro",
+                            BannerImageUrl = "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-model-unselect-gallery-2-202209_FMT_WHH?wid=1280&hei=492&fmt=p-jpg&qlt=80&.v=1660745126020",
+                            ImageUrl = "https://www.apple.com/newsroom/images/product/iphone/standard/Apple-iPhone-14-Pro-iPhone-14-Pro-Max-hero-220907.jpg.og.jpg?202209271408",
+                            IsAdActive = true,
+                            RedirectUrl = "https://www.apple.com/iphone-14-pro/"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AdName = "Unity",
+                            BannerImageUrl = "https://1000logos.net/wp-content/uploads/2021/10/Unity-logo.png",
+                            ImageUrl = "https://eu-images.contentstack.com/v3/assets/blt95b381df7c12c15d/bltbad33f5fea52f290/615c93d89aad297e10087704/Screen_Shot_2021-10-05_at_2.04.58_PM.png",
+                            IsAdActive = true,
+                            RedirectUrl = "https://unity.com"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AdName = "Coca Cola",
+                            BannerImageUrl = "https://thumbs.dreamstime.com/b/large-famous-coca-cola-advertisement-banner-letters-minsk-belarus-june-red-colour-white-bottle-sign-under-bright-192933328.jpg",
+                            ImageUrl = "https://media-assets-02.thedrum.com/cache/images/thedrum-prod/s3-news-tmp-304828-coco-cola_brand--default--968.jpg",
+                            IsAdActive = true,
+                            RedirectUrl = "https://www.coca-cola.com/"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AdName = "Nintendo Switch",
+                            BannerImageUrl = "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_2.625/c_scale/ncom/en_US/switch/site-design-update/switch-family",
+                            ImageUrl = "https://preview.redd.it/4sf8pdnbd2v01.jpg?width=640&crop=smart&auto=webp&s=81b0573ebac985ea222ab5029216c14c39230c80",
+                            IsAdActive = true,
+                            RedirectUrl = "https://www.nintendo.com/switch/"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AdName = "Sony Playstation 5",
+                            BannerImageUrl = "https://cdn.vox-cdn.com/thumbor/s0V50B4OAK9K05tKM0IOEXcSFn0=/0x0:2450x1628/1400x788/filters:focal(1225x814:1226x815)/cdn.vox-cdn.com/uploads/chorus_asset/file/20081590/ps5.png",
+                            ImageUrl = "https://www.slashgear.com/img/gallery/watch-sonys-first-playstation-5-tv-ad-talk-dualsense-and-3d-audio/intro-import.jpg",
+                            IsAdActive = true,
+                            RedirectUrl = "https://www.playstation.com/en-us/ps5/"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AdName = "Mc'Donalds",
+                            BannerImageUrl = "https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_675,pg_1,q_80,w_1200/qt1pq58r827iyyvugjfr.jpg",
+                            ImageUrl = "https://pbs.twimg.com/profile_images/1579916871654117376/Dxd2l1sN_400x400.png",
+                            IsAdActive = true,
+                            RedirectUrl = "https://www.mcdonalds.com/us/en-us.html"
                         });
                 });
 

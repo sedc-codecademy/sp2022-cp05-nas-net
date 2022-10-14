@@ -10,8 +10,9 @@ namespace NewsAggregator.Services.Abstraction
 {
     public interface ICommentService
     {
-        void Create(CommentDto comment, int userId, int articleId);
-        void Update(CommentDto comment, int commentId);
+        CommentDto GetById(int commentId);
+        int Create(CreateCommentDto comment, int userId);
+        void Update(UpdateCommentDto comment, int commentId, int userId);
         void Delete(int id);
     }
 }
